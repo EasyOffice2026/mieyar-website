@@ -80,9 +80,10 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
           <ul>
             {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} dir="ltr">{site.phone}</a></li>}
             {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
-            {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">@{site.instagram}</a></li>}
+            {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">Instagram: @{site.instagram}</a></li>}
+            {site.x && <li><a href={`https://x.com/${site.x}`} target="_blank" rel="noopener" dir="ltr">X: @{site.x}</a></li>}
             {site.address[lang] && <li>{site.address[lang]}</li>}
-            {!site.phone && !site.email && !site.instagram && <li>{u.comingSoon}</li>}
+            {!site.phone && !site.email && !site.instagram && !site.x && <li>{u.comingSoon}</li>}
             <li><a class="link-arrow" href={href(lang, 'contact')}>{u.letsTalk} <Icon name="arrow" size={16} /></a></li>
           </ul>
         </div>

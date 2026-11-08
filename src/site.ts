@@ -2,8 +2,9 @@
 export const site = {
   phone: '',
   whatsapp: '', // international format without + or spaces, e.g. 96512345678
-  email: '',
-  instagram: '', // handle without @
+  email: 'mieyar.consulting@gmail.com',
+  instagram: 'mieyar.consulting', // handle without @
+  x: 'mieyar_co', // X (Twitter) handle without @
   address: { en: '', ar: '' },
   mapEmbedUrl: '',
 };
