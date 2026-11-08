@@ -5,8 +5,12 @@ export const site = {
   email: 'mieyar.consulting@gmail.com',
   instagram: 'mieyar.consulting', // handle without @
   x: 'mieyar_co', // X (Twitter) handle without @
-  address: { en: '', ar: '' },
-  mapEmbedUrl: '',
+  address: {
+    en: 'Office No. 30, 2nd Floor, Burj Al Tujjar, Mirqab, Kuwait City',
+    ar: 'مكتب رقم 30، الدور الثاني، برج التجار، المرقاب، مدينة الكويت',
+  },
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Burj+Al+Tujjar+Mirqab+Kuwait+City',
+  mapEmbedUrl: 'https://maps.google.com/maps?q=Burj%20Al%20Tujjar%2C%20Mirqab%2C%20Kuwait%20City&z=17&output=embed',
 };
 
 export type Lang = 'en' | 'ar';
