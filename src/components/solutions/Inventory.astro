@@ -1,0 +1,58 @@
+---
+import { href, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'Independent stocktaking that matches what is on your shelves with what is in your books.',
+    kicker: 'Inventory stocktaking', title: 'Know exactly what you have',
+    text: 'Stock differences quietly eat into profit. Our stocktaking service verifies the actual quantities in your stores and warehouses, reconciles them with your accounting records and system, and explains every variance.',
+    stepsTitle: 'Our stocktaking process',
+    steps: [
+      { title: 'Planning', text: 'Agree the count type (full, partial, periodic or surprise), locations, method and a schedule that minimises downtime.' },
+      { title: 'Physical count', text: 'Count stock manually or with scanners, classify items by category and record quantities directly in the system.' },
+      { title: 'Reconciliation', text: 'Compare counted quantities with records, identify shortages and surpluses and analyse the causes.' },
+      { title: 'Report', text: 'A clear report of results and variances, including slow-moving, expired or damaged items.' },
+      { title: 'Recommendations', text: 'Practical improvements to receiving, issuing, storage and internal controls.' },
+    ],
+    priceTitle: 'Price on request', priceText: 'Pricing depends on the number of locations, items and the type of count.',
+  },
+  ar: {
+    sub: 'جرد مستقل يطابق ما على الرفوف مع ما في دفاترك.',
+    kicker: 'جرد المخزون', title: 'اعرف بالضبط ما تملكه',
+    text: 'فروقات المخزون تستنزف الأرباح بصمت. تتحقق خدمة الجرد لدينا من الكميات الفعلية في مخازنك ومستودعاتك، وتطابقها مع السجلات المحاسبية والنظام، وتشرح كل فرق.',
+    stepsTitle: 'مراحل الجرد',
+    steps: [
+      { title: 'التخطيط', text: 'تحديد نوع الجرد (كلي، جزئي، دوري أو مفاجئ) والمواقع وطريقة العد وجدول زمني يقلل توقف العمل.' },
+      { title: 'العد الفعلي', text: 'عد المخزون يدوياً أو بالأجهزة الإلكترونية وتصنيف الأصناف وتسجيل الكميات مباشرة في النظام.' },
+      { title: 'المطابقة', text: 'مقارنة الكميات الفعلية بالسجلات وتحديد العجز والزيادة وتحليل أسبابها.' },
+      { title: 'التقرير', text: 'تقرير واضح بالنتائج والفروقات، يشمل الأصناف بطيئة الحركة أو المنتهية أو التالفة.' },
+      { title: 'التوصيات', text: 'تحسينات عملية لإجراءات الاستلام والصرف والتخزين والرقابة الداخلية.' },
+    ],
+    priceTitle: 'السعر عند الطلب', priceText: 'يعتمد السعر على عدد المواقع والأصناف ونوع الجرد.',
+  },
+}[lang];
+---
+<div class="sol-block" id="inventory">
+  <section class="section">
+    <div class="container split">
+      <div class="reveal"><span class="kicker">{c.kicker}</span><h2>{c.title}</h2><p>{c.text}</p></div>
+      <img class="reveal" src="/img/inventory.jpg" alt="" loading="lazy" />
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.stepsTitle}</h2></div>
+      <div class="grid grid-3 steps">{c.steps.map((s) => <div class="step reveal"><h3>{s.title}</h3><p>{s.text}</p></div>)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container section-head reveal">
+      <h2>{c.priceTitle}</h2><p>{c.priceText}</p>
+      <a class="btn btn-navy" href={`${href(lang, 'contact')}?package=${encodeURIComponent(u.nav.inventory)}#form`}>{u.askPrice}</a>
+    </div>
+  </section>
+</div>

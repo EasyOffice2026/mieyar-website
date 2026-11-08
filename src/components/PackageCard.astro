@@ -1,0 +1,22 @@
+---
+import { href, type Lang } from '../site';
+import { t } from '../i18n/ui';
+import type { Pkg } from '../i18n/packages';
+interface Props { lang: Lang; pkg: Pkg }
+const { lang, pkg } = Astro.props;
+const u = t(lang);
+const book = `${href(lang, 'contact')}?package=${encodeURIComponent(pkg.name)}#form`;
+---
+<div class:list={['pkg', 'reveal', pkg.featured && 'featured']}>
+  {pkg.featured && <span class="badge">{u.popular}</span>}
+  <h3>{pkg.name}</h3>
+  <p class="desc">{pkg.desc}</p>
+  <div class="price">
+    <span class="amount">{pkg.price}</span>
+    <span class="cur">{u.kd}</span>
+    <span class="per">/ {pkg.period === 'monthly' ? u.monthly : u.oneTime}</span>
+  </div>
+  <div class="inc">{u.includes}</div>
+  <ul class="checklist">{pkg.features.map((f) => <li>{f}</li>)}</ul>
+  <a class:list={['btn', pkg.featured ? 'btn-gold' : 'btn-navy']} href={book}>{u.bookNow}</a>
+</div>

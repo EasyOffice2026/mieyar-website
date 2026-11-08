@@ -1,0 +1,64 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PackageCard from '../../components/PackageCard.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, href, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+import { monthlyPackages, addOns } from '../../i18n/packages';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'Monthly accounting packages that keep your books accurate, compliant and ready for decisions.',
+    kicker: 'Accounting & bookkeeping', title: 'Reliable books, every month',
+    text: 'We take care of your day-to-day accounting so you always know where your business stands. Every package includes a dedicated accountant, regular on-site visits and clear monthly reports.',
+    list: ['Daily recording of revenue and expenses', 'Bank, KNET and delivery-platform reconciliations', 'Payroll, WPS and indemnity calculations', 'Profit & loss, balance sheet and cash flow', 'Year-end accounts and audit support', 'Zakat calculation'],
+    pkgTitle: 'Choose your package', addTitle: 'Add-on services', addText: 'Available with any package. Price on request.',
+    note: 'Prices in Kuwaiti Dinar. Final scope is confirmed after a free consultation.',
+  },
+  ar: {
+    sub: 'باقات محاسبة شهرية تحافظ على دقة حساباتك والتزامها وجاهزيتها لاتخاذ القرار.',
+    kicker: 'المحاسبة ومسك الدفاتر', title: 'حسابات موثوقة كل شهر',
+    text: 'نتولى المحاسبة اليومية لأعمالك لتعرف دائماً وضع شركتك. تشمل كل باقة محاسباً مخصصاً وزيارات ميدانية منتظمة وتقارير شهرية واضحة.',
+    list: ['تسجيل يومي للإيرادات والمصروفات', 'تسويات البنوك والكي نت ومنصات التوصيل', 'الرواتب ونظام حماية الأجور ومكافأة نهاية الخدمة', 'الأرباح والخسائر والميزانية والتدفقات النقدية', 'الحسابات الختامية ودعم التدقيق', 'احتساب الزكاة'],
+    pkgTitle: 'اختر باقتك', addTitle: 'خدمات إضافية', addText: 'متاحة مع أي باقة. السعر عند الطلب.',
+    note: 'الأسعار بالدينار الكويتي. يتم تأكيد نطاق العمل النهائي بعد استشارة مجانية.',
+  },
+}[lang];
+---
+<Base lang={lang} page="accounting" title={u.nav.accounting} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.accounting} subtitle={c.sub} image="/img/bookkeeping.jpg" />
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="kicker">{c.kicker}</span>
+        <h2>{c.title}</h2>
+        <p>{c.text}</p>
+        <ul class="checklist cols">{c.list.map((l) => <li>{l}</li>)}</ul>
+      </div>
+      <img class="reveal" src="/img/financial.jpg" alt="" loading="lazy" />
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.pkgTitle}</h2></div>
+      <div class="grid grid-3">{monthlyPackages[lang].map((p) => <PackageCard lang={lang} pkg={p} />)}</div>
+      <p class="note">{c.note}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container split reverse">
+      <div class="reveal">
+        <h2>{c.addTitle}</h2>
+        <p>{c.addText}</p>
+        <ul class="checklist">{addOns[lang].map((a) => <li>{a}</li>)}</ul>
+        <p style="margin-top:28px"><a class="btn btn-outline-navy" href={href(lang, 'contact')}>{u.askPrice}</a></p>
+      </div>
+      <img class="reveal" src="/img/advisory.jpg" alt="" loading="lazy" />
+    </div>
+  </section>
+  <Cta lang={lang} />
+</Base>

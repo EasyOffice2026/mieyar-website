@@ -1,0 +1,199 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PackageCard from '../../components/PackageCard.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, href, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+import { monthlyPackages } from '../../i18n/packages';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+
+const c = {
+  en: {
+    eyebrow: 'Mieyar Accounting Consultancy',
+    h1a: 'Clarity', h1b: 'in every number. Confidence in every decision.',
+    lead: 'Bookkeeping, financial management and advisory for businesses in Kuwait. Accurate books, timely reports and clear advice, so you can focus on growing your business.',
+    servicesKicker: 'What we do',
+    servicesTitle: 'Three services, one trusted partner',
+    servicesText: 'From daily entries to long-term strategy, Mieyar covers the full financial cycle of your business.',
+    services: [
+      { img: '/img/bookkeeping.jpg', title: 'Bookkeeping', text: 'Accurate recording of every transaction, reconciliations, payroll and month-end closing, done on time every month.', link: 'accounting' },
+      { img: '/img/financial.jpg', title: 'Financial Management', text: 'Financial statements, cash-flow planning, budgets and dashboards that show you exactly where your business stands.', link: 'sme' },
+      { img: '/img/advisory.jpg', title: 'Advisory', text: 'Feasibility studies, business plans, costing, pricing and process improvement to help you take the next step.', link: 'advisory' },
+    ],
+    sectorsKicker: 'Who we serve',
+    sectorsTitle: 'Specialised support for your sector',
+    sectors: [
+      { img: '/img/sme.jpg', title: 'SMEs & Startups', text: 'Financial plans and feasibility studies', link: 'sme' },
+      { img: '/img/clinics.jpg', title: 'Clinics', text: 'Insurance, payroll and clinic reporting', link: 'clinics' },
+      { img: '/img/inventory.jpg', title: 'Retail & Trading', text: 'Stocktaking and inventory control', link: 'inventory' },
+      { img: '/img/analytics.jpg', title: 'Growing Companies', text: 'Monthly accounting and KPIs', link: 'accounting' },
+    ],
+    whyKicker: 'Why Mieyar',
+    whyTitle: 'The standard your numbers deserve',
+    why: [
+      { icon: 'scale', title: 'Accuracy first', text: 'Every entry is reviewed and reconciled, so your reports are reliable.' },
+      { icon: 'map', title: 'Local expertise', text: 'We know Kuwait: WPS, PIFSS, indemnity, Zakat and local banking practice.' },
+      { icon: 'clock', title: 'On-time reporting', text: 'Monthly reports delivered on schedule, so decisions are never delayed.' },
+      { icon: 'lock', title: 'Strict confidentiality', text: 'Your financial data is handled with complete discretion and care.' },
+    ],
+    pkgKicker: 'Monthly packages',
+    pkgTitle: 'Accounting & bookkeeping packages',
+    pkgText: 'Clear monthly pricing with no surprises. Choose the package that fits your business today and upgrade as you grow.',
+    stepsKicker: 'How we work',
+    stepsTitle: 'Getting started is simple',
+    steps: [
+      { title: 'Free consultation', text: 'We learn about your business, current books and goals.' },
+      { title: 'Tailored proposal', text: 'We recommend the right package and scope of work.' },
+      { title: 'Onboarding', text: 'We set up or clean up your accounts and systems.' },
+      { title: 'Monthly reporting', text: 'You receive clear reports and advice every month.' },
+    ],
+  },
+  ar: {
+    eyebrow: 'شركة معيار للاستشارات المحاسبية',
+    h1a: 'وضوح', h1b: 'في كل رقم، وثقة في كل قرار.',
+    lead: 'خدمات مسك الدفاتر والإدارة المالية والاستشارات للشركات في الكويت. حسابات دقيقة وتقارير في وقتها ونصيحة واضحة، لتتفرغ أنت لتنمية أعمالك.',
+    servicesKicker: 'ماذا نقدم',
+    servicesTitle: 'ثلاث خدمات وشريك واحد موثوق',
+    servicesText: 'من القيود اليومية إلى الاستراتيجية طويلة المدى، تغطي معيار الدورة المالية الكاملة لأعمالك.',
+    services: [
+      { img: '/img/bookkeeping.jpg', title: 'مسك الدفاتر', text: 'تسجيل دقيق لكل معاملة، والتسويات، والرواتب، والإقفال الشهري في موعده كل شهر.', link: 'accounting' },
+      { img: '/img/financial.jpg', title: 'الإدارة المالية', text: 'قوائم مالية، وتخطيط للتدفقات النقدية، وموازنات، ولوحات مؤشرات توضح لك وضع أعمالك بدقة.', link: 'sme' },
+      { img: '/img/advisory.jpg', title: 'الاستشارات', text: 'دراسات جدوى، وخطط عمل، واحتساب التكاليف، والتسعير، وتطوير الإجراءات لمساعدتك على الخطوة التالية.', link: 'advisory' },
+    ],
+    sectorsKicker: 'من نخدم',
+    sectorsTitle: 'دعم متخصص لقطاع أعمالك',
+    sectors: [
+      { img: '/img/sme.jpg', title: 'المشاريع الصغيرة والناشئة', text: 'خطط مالية ودراسات جدوى', link: 'sme' },
+      { img: '/img/clinics.jpg', title: 'العيادات', text: 'التأمين والرواتب وتقارير العيادات', link: 'clinics' },
+      { img: '/img/inventory.jpg', title: 'التجزئة والتجارة', text: 'الجرد والرقابة على المخزون', link: 'inventory' },
+      { img: '/img/analytics.jpg', title: 'الشركات النامية', text: 'محاسبة شهرية ومؤشرات أداء', link: 'accounting' },
+    ],
+    whyKicker: 'لماذا معيار',
+    whyTitle: 'المعيار الذي تستحقه أرقامك',
+    why: [
+      { icon: 'scale', title: 'الدقة أولاً', text: 'نراجع ونسوّي كل قيد لتكون تقاريرك موثوقة.' },
+      { icon: 'map', title: 'خبرة محلية', text: 'نعرف السوق الكويتي: حماية الأجور، والتأمينات الاجتماعية، ومكافأة نهاية الخدمة، والزكاة.' },
+      { icon: 'clock', title: 'تقارير في موعدها', text: 'تقارير شهرية تصلك في الوقت المحدد حتى لا تتأخر قراراتك.' },
+      { icon: 'lock', title: 'سرية تامة', text: 'نتعامل مع بياناتك المالية بأقصى درجات السرية والعناية.' },
+    ],
+    pkgKicker: 'الباقات الشهرية',
+    pkgTitle: 'باقات المحاسبة ومسك الدفاتر',
+    pkgText: 'أسعار شهرية واضحة بدون مفاجآت. اختر الباقة المناسبة لأعمالك اليوم وقم بالترقية مع نموك.',
+    stepsKicker: 'كيف نعمل',
+    stepsTitle: 'البداية سهلة',
+    steps: [
+      { title: 'استشارة مجانية', text: 'نتعرف على نشاطك وحساباتك الحالية وأهدافك.' },
+      { title: 'عرض مخصص', text: 'نرشح لك الباقة ونطاق العمل المناسبين.' },
+      { title: 'التهيئة', text: 'نُعد حساباتك وأنظمتك أو نعيد تنظيمها.' },
+      { title: 'تقارير شهرية', text: 'تستلم تقارير ونصائح واضحة كل شهر.' },
+    ],
+  },
+}[lang];
+---
+<Base lang={lang} page="home">
+  <section class="hero">
+    <div class="hero-bg" style="background-image:url(/img/hero.jpg)"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow">{c.eyebrow}</div>
+        <h1><em>{c.h1a}</em> {c.h1b}</h1>
+        <p class="lead">{c.lead}</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href={href(lang, 'accounting')}>{u.viewPackages} <Icon name="arrow" size={18} /></a>
+          <a class="btn btn-outline" href={href(lang, 'contact')}>{u.letsTalk}</a>
+        </div>
+        <div class="hero-pills">{u.tagline.split(' · ').map((s) => <span>{s}</span>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">{c.servicesKicker}</span>
+        <h2>{c.servicesTitle}</h2>
+        <p>{c.servicesText}</p>
+      </div>
+      <div class="grid grid-3">
+        {c.services.map((s) => (
+          <a class="card reveal" href={href(lang, s.link as any)}>
+            <img class="card-img" src={s.img} alt="" loading="lazy" />
+            <div class="card-body">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+              <span class="link-arrow">{u.learnMore} <Icon name="arrow" size={16} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">{c.whyKicker}</span>
+        <h2>{c.whyTitle}</h2>
+      </div>
+      <div class="grid grid-4">
+        {c.why.map((w) => (
+          <div class="feature reveal">
+            <div class="icon"><Icon name={w.icon} /></div>
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">{c.sectorsKicker}</span>
+        <h2>{c.sectorsTitle}</h2>
+      </div>
+      <div class="grid grid-4">
+        {c.sectors.map((s) => (
+          <a class="sector reveal" href={href(lang, s.link as any)}>
+            <img src={s.img} alt="" loading="lazy" />
+            <div class="body"><h3>{s.title}</h3><p>{s.text}</p></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">{c.pkgKicker}</span>
+        <h2>{c.pkgTitle}</h2>
+        <p>{c.pkgText}</p>
+      </div>
+      <div class="grid grid-3">
+        {monthlyPackages[lang].map((p) => <PackageCard lang={lang} pkg={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">{c.stepsKicker}</span>
+        <h2>{c.stepsTitle}</h2>
+      </div>
+      <div class="grid grid-4 steps">
+        {c.steps.map((s) => (
+          <div class="step reveal"><h3>{s.title}</h3><p>{s.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta lang={lang} />
+</Base>

@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'We support businesses of all sizes across a wide range of industries in Kuwait.',
+    indTitle: 'Industries we serve',
+    industries: [
+      { icon: 'food', title: 'Restaurants & Cafés' }, { icon: 'clinic', title: 'Clinics & Healthcare' },
+      { icon: 'store', title: 'Retail & E-commerce' }, { icon: 'box', title: 'Trading & Distribution' },
+      { icon: 'briefcase', title: 'Professional Services' }, { icon: 'star', title: 'Startups & Home Businesses' },
+      { icon: 'users', title: 'Salons & Fitness' }, { icon: 'settings', title: 'Contracting & Maintenance' },
+    ],
+    logosTitle: 'Our clients', logosText: 'Client logos will be displayed here.',
+  },
+  ar: {
+    sub: 'ندعم الشركات بمختلف أحجامها في مجموعة واسعة من القطاعات في الكويت.',
+    indTitle: 'القطاعات التي نخدمها',
+    industries: [
+      { icon: 'food', title: 'المطاعم والمقاهي' }, { icon: 'clinic', title: 'العيادات والرعاية الصحية' },
+      { icon: 'store', title: 'التجزئة والتجارة الإلكترونية' }, { icon: 'box', title: 'التجارة والتوزيع' },
+      { icon: 'briefcase', title: 'الخدمات المهنية' }, { icon: 'star', title: 'المشاريع الناشئة والمنزلية' },
+      { icon: 'users', title: 'الصالونات والأندية الرياضية' }, { icon: 'settings', title: 'المقاولات والصيانة' },
+    ],
+    logosTitle: 'عملاؤنا', logosText: 'سيتم عرض شعارات العملاء هنا.',
+  },
+}[lang];
+---
+<Base lang={lang} page="clients" title={u.nav.clients} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.clients} subtitle={c.sub} image="/img/clients.jpg" />
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.indTitle}</h2></div>
+      <div class="grid grid-4">
+        {c.industries.map((i) => <div class="feature value reveal"><div class="icon"><Icon name={i.icon} /></div><h3>{i.title}</h3></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.logosTitle}</h2></div>
+      <div class="placeholder-box reveal">
+        <p>{c.logosText}</p>
+        <div class="logo-tiles">{Array.from({ length: 6 }).map(() => <div />)}</div>
+      </div>
+    </div>
+  </section>
+  <Cta lang={lang} />
+</Base>

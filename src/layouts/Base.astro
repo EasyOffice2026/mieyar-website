@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { site, href, type Lang, type PageKey, type LinkKey } from '../site';
+import { t } from '../i18n/ui';
+
+interface Props { lang: Lang; page: PageKey; title?: string; description?: string }
+const { lang, page, title, description } = Astro.props;
+const u = t(lang);
+const other: Lang = lang === 'en' ? 'ar' : 'en';
+const fullTitle = title ? `${title} | ${u.brandFull}` : `${u.brandFull} | ${u.tagline}`;
+const desc = description ?? u.footerAbout;
+const navKeys: PageKey[] = ['home', 'about', 'accounting', 'solutions', 'advisory', 'clients', 'contact'];
+const year = new Date().getFullYear();
+const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
+---
+<!doctype html>
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:image" content="/img/logo-full.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="alternate" hreflang={other} href={href(other, page)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href={href(lang, 'home')} aria-label={u.brandFull}>
+          <img src="/img/logo-full.png" alt={u.brandFull} width="193" height="52" />
+        </a>
+        <nav class="main-nav" id="main-nav">
+          {navKeys.map((k) => (
+            <a href={href(lang, k)} class:list={[k === page && 'active']}>{u.nav[k]}</a>
+          ))}
+        </nav>
+        <div class="header-actions">
+          <a class="lang-switch" href={href(other, page)} hreflang={other}>{u.switchLang}</a>
+          <a class="btn btn-gold header-cta" href={href(lang, 'contact')}>{u.letsTalk}</a>
+          <button class="menu-toggle" aria-label={u.menu} aria-controls="main-nav" aria-expanded="false" id="menu-toggle">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/img/logo-icon.png" alt="" width="56" height="56" />
+            <div><div class="name">MIEYAR</div><div class="ar">شركة معيار للاستشارات المحاسبية</div></div>
+          </div>
+          <p>{u.footerAbout}</p>
+        </div>
+        <div>
+          <h4>{u.quickLinks}</h4>
+          <ul>
+            {(['home', 'about', 'clients', 'contact'] as PageKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>{u.services}</h4>
+          <ul>
+            {(['accounting', 'sme', 'clinics', 'inventory', 'advisory'] as LinkKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>{u.contact}</h4>
+          <ul>
+            {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} dir="ltr">{site.phone}</a></li>}
+            {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
+            {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">@{site.instagram}</a></li>}
+            {site.address[lang] && <li>{site.address[lang]}</li>}
+            {!site.phone && !site.email && !site.instagram && <li>{u.comingSoon}</li>}
+            <li><a class="link-arrow" href={href(lang, 'contact')}>{u.letsTalk} <Icon name="arrow" size={16} /></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© {year} {u.brandFull}. {u.rights}</span>
+        <span>{u.tagline}</span>
+      </div>
+    </footer>
+
+    {wa && (
+      <a class="wa-float" href={wa} target="_blank" rel="noopener" aria-label={u.whatsapp}>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2S21.8 6.6 21.8 12 17.4 21.8 12 21.8zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0z"/></svg>
+      </a>
+    )}
+
+    <script>
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('main-nav');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(!!open));
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

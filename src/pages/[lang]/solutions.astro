@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import Sme from '../../components/solutions/Sme.astro';
+import Clinics from '../../components/solutions/Clinics.astro';
+import Inventory from '../../components/solutions/Inventory.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const sub = {
+  en: 'Specialised services for SMEs and startups, clinics, and retail and trading businesses, all in one place.',
+  ar: 'خدمات متخصصة للمشاريع الصغيرة والناشئة والعيادات وشركات التجزئة والتجارة في مكان واحد.',
+}[lang];
+const tabs = [
+  { id: 'sme', icon: 'briefcase', label: u.nav.sme },
+  { id: 'clinics', icon: 'clinic', label: u.nav.clinics },
+  { id: 'inventory', icon: 'box', label: u.nav.inventory },
+] as const;
+---
+<Base lang={lang} page="solutions" title={u.nav.solutions} description={sub}>
+  <PageHero lang={lang} title={u.nav.solutions} subtitle={sub} image="/img/sme.jpg" />
+  <nav class="sol-tabs" aria-label={u.nav.solutions}>
+    <div class="container">
+      {tabs.map((tab) => <a href={`#${tab.id}`} data-tab={tab.id}><Icon name={tab.icon} size={18} /> {tab.label}</a>)}
+    </div>
+  </nav>
+  <Sme lang={lang} />
+  <Clinics lang={lang} />
+  <Inventory lang={lang} />
+  <Cta lang={lang} />
+</Base>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.sol-tabs a');
+  const setActive = (id: string) => links.forEach((a) => a.classList.toggle('active', a.dataset.tab === id));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('.sol-block').forEach((el) => io.observe(el));
+  setActive(location.hash.slice(1) || 'sme');
+</script>

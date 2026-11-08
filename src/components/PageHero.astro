@@ -1,0 +1,15 @@
+---
+import { href, type Lang } from '../site';
+import { t } from '../i18n/ui';
+interface Props { lang: Lang; title: string; subtitle?: string; image: string }
+const { lang, title, subtitle, image } = Astro.props;
+const u = t(lang);
+---
+<section class="page-hero">
+  <div class="hero-bg" style={`background-image:url(${image})`}></div>
+  <div class="container inner">
+    <div class="breadcrumb"><a href={href(lang, 'home')}>{u.nav.home}</a> / {title}</div>
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>

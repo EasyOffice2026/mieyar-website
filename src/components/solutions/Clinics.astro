@@ -1,0 +1,70 @@
+---
+import { href, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'End-to-end accounting built around how clinics actually operate.',
+    kicker: 'Clinic accounting', title: 'Let doctors focus on patients. We handle the numbers.',
+    p: [
+      'Clinics deal with a unique mix of cash patients, insurance companies, doctor commissions and expensive medical equipment. Our clinic service brings all of this together in one accurate, well-organised set of books.',
+      'We work alongside your clinic management system to make sure every visit, claim and payment is recorded, reconciled and reported, giving you a clear view of profitability by doctor, department and service.',
+    ],
+    delivTitle: 'What we deliver',
+    deliv: [
+      { title: 'Bookkeeping & reconciliations', text: 'Bank, KNET/POS, online payment gateways, petty cash and supplier bills.' },
+      { title: 'Insurance claims', text: 'Posting and reconciling insurer remittances, tracking rejections and short payments.' },
+      { title: 'Patient & corporate receivables', text: 'Aging reports, reminders and follow-up on outstanding balances.' },
+      { title: 'Payroll & commissions', text: 'Monthly payroll, doctor commissions, WPS file, PIFSS, leave and end-of-service accruals.' },
+      { title: 'Fixed assets', text: 'Medical equipment register and depreciation schedules.' },
+      { title: 'Inventory', text: 'Medical consumables and pharmacy stock control and periodic counts.' },
+      { title: 'Management reporting', text: 'P&L, balance sheet, cash flow, and revenue by doctor, department and service.' },
+      { title: 'Year-end & audit', text: 'Year-end closing, audit schedules and liaison with your auditors.' },
+    ],
+    priceTitle: 'Tailored pricing', priceText: 'Every clinic is different. Pricing depends on the number of doctors, transactions and branches.',
+  },
+  ar: {
+    sub: 'خدمات محاسبية متكاملة مصممة حسب طبيعة عمل العيادات.',
+    kicker: 'محاسبة العيادات', title: 'دع الأطباء يركزون على المرضى، ونحن نتولى الأرقام.',
+    p: [
+      'تتعامل العيادات مع مزيج خاص من المرضى النقديين وشركات التأمين وعمولات الأطباء والمعدات الطبية باهظة الثمن. تجمع خدمتنا كل ذلك في حسابات دقيقة ومنظمة.',
+      'نعمل جنباً إلى جنب مع نظام إدارة العيادة لضمان تسجيل كل زيارة ومطالبة ودفعة وتسويتها والتقرير عنها، مما يمنحك رؤية واضحة للربحية حسب الطبيب والقسم والخدمة.',
+    ],
+    delivTitle: 'ما نقدمه',
+    deliv: [
+      { title: 'مسك الدفاتر والتسويات', text: 'البنوك، والكي نت ونقاط البيع، وبوابات الدفع الإلكتروني، والعهد النقدية، وفواتير الموردين.' },
+      { title: 'مطالبات التأمين', text: 'تسجيل وتسوية دفعات شركات التأمين ومتابعة المطالبات المرفوضة والمدفوعة جزئياً.' },
+      { title: 'ذمم المرضى والشركات', text: 'تقارير أعمار الديون والتذكير ومتابعة الأرصدة المستحقة.' },
+      { title: 'الرواتب والعمولات', text: 'الرواتب الشهرية وعمولات الأطباء وملف حماية الأجور والتأمينات ومخصصات الإجازات ونهاية الخدمة.' },
+      { title: 'الأصول الثابتة', text: 'سجل المعدات الطبية وجداول الإهلاك.' },
+      { title: 'المخزون', text: 'الرقابة على المستهلكات الطبية ومخزون الصيدلية والجرد الدوري.' },
+      { title: 'التقارير الإدارية', text: 'الأرباح والخسائر والميزانية والتدفقات النقدية والإيرادات حسب الطبيب والقسم والخدمة.' },
+      { title: 'الإقفال السنوي والتدقيق', text: 'الإقفال السنوي وجداول التدقيق والتنسيق مع المدققين.' },
+    ],
+    priceTitle: 'أسعار مخصصة', priceText: 'كل عيادة مختلفة. يعتمد السعر على عدد الأطباء والمعاملات والفروع.',
+  },
+}[lang];
+---
+<div class="sol-block" id="clinics">
+  <section class="section">
+    <div class="container split">
+      <div class="reveal"><span class="kicker">{c.kicker}</span><h2>{c.title}</h2>{c.p.map((p) => <p>{p}</p>)}</div>
+      <img class="reveal" src="/img/clinics.jpg" alt="" loading="lazy" />
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.delivTitle}</h2></div>
+      <div class="grid grid-4">{c.deliv.map((d) => <div class="deliv reveal"><h3>{d.title}</h3><p>{d.text}</p></div>)}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container section-head reveal">
+      <h2>{c.priceTitle}</h2><p>{c.priceText}</p>
+      <a class="btn btn-navy" href={`${href(lang, 'contact')}?package=${encodeURIComponent(u.nav.clinics)}#form`}>{u.askPrice}</a>
+    </div>
+  </section>
+</div>
