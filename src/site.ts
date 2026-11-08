@@ -1,6 +1,6 @@
 // Contact details: leave a value empty ('') to show "coming soon" on the site.
 export const site = {
-  phone: '',
+  phone: '+965 51414302',
   whatsapp: '', // international format without + or spaces, e.g. 96512345678
   email: 'mieyar.consulting@gmail.com',
   instagram: 'mieyar.consulting', // handle without @
