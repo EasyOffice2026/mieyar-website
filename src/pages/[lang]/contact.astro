@@ -58,7 +58,7 @@ const options = [
             <div>
               <h4>{it.label}</h4>
               {it.value
-                ? (it.link ? <a class="val" href={it.link} target="_blank" rel="noopener">{it.value}</a> : <span class="val">{it.value}</span>)
+                ? (it.link ? <a class="val" href={it.link} target="_blank" rel="noopener" dir={it.icon === 'map' ? undefined : 'ltr'}>{it.value}</a> : <span class="val">{it.value}</span>)
                 : <span class="soon">{u.comingSoon}</span>}
             </div>
           </div>

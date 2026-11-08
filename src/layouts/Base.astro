@@ -79,8 +79,8 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
           <h4>{u.contact}</h4>
           <ul>
             {site.phone && <li><a href={`tel:${site.phone.replace(/\s/g, '')}`} dir="ltr">{site.phone}</a></li>}
-            {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
-            {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener">Instagram: @{site.instagram}</a></li>}
+            {site.email && <li><a href={`mailto:${site.email}`} dir="ltr">{site.email}</a></li>}
+            {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener" dir="ltr">Instagram: @{site.instagram}</a></li>}
             {site.x && <li><a href={`https://x.com/${site.x}`} target="_blank" rel="noopener" dir="ltr">X: @{site.x}</a></li>}
             {site.address[lang] && <li>{site.address[lang]}</li>}
             {!site.phone && !site.email && !site.instagram && !site.x && <li>{u.comingSoon}</li>}
