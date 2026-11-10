@@ -13,7 +13,7 @@ const c = {
   en: {
     sub: 'Tell us about your business and we will get back to you with the right solution.',
     infoTitle: 'Get in touch', infoText: 'Reach us through any of the channels below, or send us a message using the form.',
-    phone: 'Phone', whatsapp: 'WhatsApp', email: 'Email', address: 'Office', instagram: 'Instagram', x: 'X (Twitter)',
+    phone: 'Phone', whatsapp: 'WhatsApp', email: 'Email', address: 'Office', instagram: 'Instagram', x: 'X (Twitter)', linkedin: 'LinkedIn',
     formTitle: 'Book a consultation', name: 'Full name', mobile: 'Mobile number', mail: 'Email', company: 'Company name',
     pkg: 'Package / service', pkgNone: 'Select a package or service', other: 'Other / not sure', message: 'Message', send: 'Send request',
     sent: 'Thank you! We are opening your message now.',
@@ -23,7 +23,7 @@ const c = {
   ar: {
     sub: 'أخبرنا عن نشاطك التجاري وسنعود إليك بالحل المناسب.',
     infoTitle: 'تواصل معنا', infoText: 'يمكنك التواصل معنا عبر أي من القنوات التالية، أو إرسال رسالة من خلال النموذج.',
-    phone: 'الهاتف', whatsapp: 'واتساب', email: 'البريد الإلكتروني', address: 'المكتب', instagram: 'إنستغرام', x: 'إكس (تويتر)',
+    phone: 'الهاتف', whatsapp: 'واتساب', email: 'البريد الإلكتروني', address: 'المكتب', instagram: 'إنستغرام', x: 'إكس (تويتر)', linkedin: 'لينكدإن',
     formTitle: 'احجز استشارة', name: 'الاسم الكامل', mobile: 'رقم الهاتف', mail: 'البريد الإلكتروني', company: 'اسم الشركة',
     pkg: 'الباقة / الخدمة', pkgNone: 'اختر باقة أو خدمة', other: 'أخرى / غير متأكد', message: 'الرسالة', send: 'إرسال الطلب',
     sent: 'شكراً لك! جارٍ فتح رسالتك الآن.',
@@ -38,6 +38,7 @@ const items = [
   { icon: 'map', label: c.address, value: site.address[lang], link: site.address[lang] ? site.mapUrl : '' },
   { icon: 'instagram', label: c.instagram, value: site.instagram ? `@${site.instagram}` : '', link: site.instagram ? `https://instagram.com/${site.instagram}` : '' },
   { icon: 'x', label: c.x, value: site.x ? `@${site.x}` : '', link: site.x ? `https://x.com/${site.x}` : '' },
+  { icon: 'linkedin', label: c.linkedin, value: site.linkedin ? 'Mieyar Accounting' : '', link: site.linkedin ? `https://www.linkedin.com/company/${site.linkedin}` : '' },
 ];
 const options = [
   ...monthlyPackages[lang].map((p) => p.name),

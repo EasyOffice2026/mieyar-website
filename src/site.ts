@@ -5,6 +5,7 @@ export const site = {
   email: 'mieyar.consulting@gmail.com',
   instagram: 'mieyar.consulting', // handle without @
   x: 'mieyar_co', // X (Twitter) handle without @
+  linkedin: 'mieyar-accounting', // linkedin.com/company/<slug>
   address: {
     en: 'Office No. 30, 2nd Floor, Burj Al Tujjar, Mirqab, Kuwait City',
     ar: 'مكتب رقم 30، الدور الثاني، برج التجار، المرقاب، مدينة الكويت',

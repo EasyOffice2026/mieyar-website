@@ -83,8 +83,9 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
             {site.email && <li><a href={`mailto:${site.email}`} dir="ltr">{site.email}</a></li>}
             {site.instagram && <li><a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener" dir="ltr">Instagram: @{site.instagram}</a></li>}
             {site.x && <li><a href={`https://x.com/${site.x}`} target="_blank" rel="noopener" dir="ltr">X: @{site.x}</a></li>}
+            {site.linkedin && <li><a href={`https://www.linkedin.com/company/${site.linkedin}`} target="_blank" rel="noopener" dir="ltr">LinkedIn: Mieyar Accounting</a></li>}
             {site.address[lang] && <li>{site.address[lang]}</li>}
-            {!site.phone && !site.email && !site.instagram && !site.x && <li>{u.comingSoon}</li>}
+            {!site.phone && !site.email && !site.instagram && !site.x && !site.linkedin && <li>{u.comingSoon}</li>}
             <li><a class="link-arrow" href={href(lang, 'contact')}>{u.letsTalk} <Icon name="arrow" size={16} /></a></li>
           </ul>
         </div>
