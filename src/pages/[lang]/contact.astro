@@ -33,7 +33,7 @@ const c = {
 }[lang];
 const items = [
   { icon: 'phone', label: c.phone, value: site.phone, link: site.phone ? `tel:${site.phone.replace(/\s/g, '')}` : '' },
-  { icon: 'whatsapp', label: c.whatsapp, value: site.whatsapp ? `+${site.whatsapp}` : '', link: site.whatsapp ? `https://wa.me/${site.whatsapp}` : '' },
+  { icon: 'whatsapp', label: c.whatsapp, value: site.whatsapp ? `+${site.whatsapp.replace(/^965/, '965 ')}` : '', link: site.whatsapp ? `https://wa.me/${site.whatsapp}` : '' },
   { icon: 'mail', label: c.email, value: site.email, link: site.email ? `mailto:${site.email}` : '' },
   { icon: 'map', label: c.address, value: site.address[lang], link: site.address[lang] ? site.mapUrl : '' },
   { icon: 'instagram', label: c.instagram, value: site.instagram ? `@${site.instagram}` : '', link: site.instagram ? `https://instagram.com/${site.instagram}` : '' },
