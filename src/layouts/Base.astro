@@ -25,7 +25,9 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:image" content="/img/logo-full.png" />
+    <link rel="icon" type="image/svg+xml" href="/img/icon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="alternate" hreflang={other} href={href(other, page)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +37,7 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
     <header class="site-header">
       <div class="container header-inner">
         <a class="logo" href={href(lang, 'home')} aria-label={u.brandFull}>
-          <img src="/img/logo-full.png" alt={u.brandFull} width="193" height="52" />
+          <img src="/img/logo.svg" alt={u.brandFull} width="198" height="52" />
         </a>
         <nav class="main-nav" id="main-nav">
           {navKeys.map((k) => (
@@ -58,8 +60,7 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
       <div class="container footer-grid">
         <div>
           <div class="footer-brand">
-            <img src="/img/logo-icon.png" alt="" width="56" height="56" />
-            <div><div class="name">MIEYAR</div><div class="ar">شركة معيار للاستشارات المحاسبية</div></div>
+            <img src="/img/logo-reversed.svg" alt={u.brandFull} width="244" height="64" loading="lazy" />
           </div>
           <p>{u.footerAbout}</p>
         </div>
