@@ -5,4 +5,4 @@ import { langs, href, type Lang } from '../../site';
 export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
 const lang = Astro.params.lang as Lang;
 ---
-<Redirect to={href(lang, 'clinics')} />
+<Redirect to={href(lang, 'industries')} />

@@ -24,12 +24,13 @@ export const pages = {
   solutions: 'solutions',
   advisory: 'advisory',
   clients: 'clients',
+  careers: 'careers',
   contact: 'contact',
 } as const;
 
 export type PageKey = keyof typeof pages;
 
-export const solutionSections = ['sme', 'clinics', 'inventory'] as const;
+export const solutionSections = ['plans', 'industries'] as const;
 export type SectionKey = (typeof solutionSections)[number];
 export type LinkKey = PageKey | SectionKey;
 

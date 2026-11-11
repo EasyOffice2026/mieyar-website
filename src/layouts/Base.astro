@@ -10,7 +10,7 @@ const u = t(lang);
 const other: Lang = lang === 'en' ? 'ar' : 'en';
 const fullTitle = title ? `${title} | ${u.brandFull}` : `${u.brandFull} | ${u.tagline}`;
 const desc = description ?? u.footerAbout;
-const navKeys: PageKey[] = ['home', 'about', 'accounting', 'advisory', 'solutions', 'clients', 'contact'];
+const navKeys: PageKey[] = ['home', 'about', 'accounting', 'advisory', 'solutions', 'clients', 'careers', 'contact'];
 const year = new Date().getFullYear();
 const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
 ---
@@ -67,13 +67,13 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
         <div>
           <h4>{u.quickLinks}</h4>
           <ul>
-            {(['home', 'about', 'clients', 'contact'] as PageKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+            {(['home', 'about', 'clients', 'careers', 'contact'] as PageKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
           </ul>
         </div>
         <div>
           <h4>{u.services}</h4>
           <ul>
-            {(['accounting', 'advisory', 'sme', 'clinics', 'inventory'] as LinkKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+            {(['accounting', 'advisory', 'plans', 'industries'] as LinkKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
           </ul>
         </div>
         <div>

@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import { langs, site, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'Build your career in accounting and finance with a growing Kuwaiti consultancy.',
+    whyKicker: 'Why Mieyar', whyTitle: 'Grow with us',
+    why: [
+      { icon: 'chart', title: 'Real experience', text: 'Work on the books of real businesses across many industries.' },
+      { icon: 'book', title: 'Continuous learning', text: 'Training on accounting systems, reporting and advisory work.' },
+      { icon: 'users', title: 'Supportive team', text: 'Learn from experienced accountants and consultants.' },
+      { icon: 'target', title: 'Clear career path', text: 'Take on more responsibility as your skills grow.' },
+    ],
+    jobsTitle: 'Open positions',
+    jobsEmpty: 'There are no open positions right now, but we are always happy to hear from talented accountants, bookkeepers and finance graduates. Send us your details and CV and we will contact you when a suitable role opens.',
+    formTitle: 'Apply now', name: 'Full name', mobile: 'Mobile number', mail: 'Email', position: 'Position of interest',
+    positions: ['Accountant', 'Senior Accountant', 'Bookkeeper', 'Financial Analyst', 'Internship / Fresh graduate', 'Other'],
+    experience: 'Years of experience', message: 'About you', send: 'Send application',
+    cvNote: 'Your email app will open. Please attach your CV before sending.',
+    subject: 'Job application', greeting: 'Hello Mieyar, I would like to apply for a position. My CV is attached.',
+  },
+  ar: {
+    sub: 'ابنِ مسيرتك المهنية في المحاسبة والمالية مع شركة استشارات كويتية نامية.',
+    whyKicker: 'لماذا معيار', whyTitle: 'انمُ معنا',
+    why: [
+      { icon: 'chart', title: 'خبرة عملية', text: 'اعمل على حسابات شركات حقيقية في قطاعات متعددة.' },
+      { icon: 'book', title: 'تعلّم مستمر', text: 'تدريب على الأنظمة المحاسبية وإعداد التقارير والأعمال الاستشارية.' },
+      { icon: 'users', title: 'فريق داعم', text: 'تعلّم من محاسبين ومستشارين ذوي خبرة.' },
+      { icon: 'target', title: 'مسار مهني واضح', text: 'تولَّ مسؤوليات أكبر مع تطور مهاراتك.' },
+    ],
+    jobsTitle: 'الوظائف المتاحة',
+    jobsEmpty: 'لا توجد وظائف شاغرة حالياً، لكننا نرحب دائماً بالمحاسبين ومسؤولي مسك الدفاتر وخريجي المالية المتميزين. أرسل لنا بياناتك وسيرتك الذاتية وسنتواصل معك عند توفر الوظيفة المناسبة.',
+    formTitle: 'قدّم الآن', name: 'الاسم الكامل', mobile: 'رقم الهاتف', mail: 'البريد الإلكتروني', position: 'الوظيفة المطلوبة',
+    positions: ['محاسب', 'محاسب أول', 'مسؤول مسك الدفاتر', 'محلل مالي', 'تدريب / حديث التخرج', 'أخرى'],
+    experience: 'سنوات الخبرة', message: 'نبذة عنك', send: 'إرسال الطلب',
+    cvNote: 'سيفتح تطبيق البريد لديك. يرجى إرفاق سيرتك الذاتية قبل الإرسال.',
+    subject: 'طلب توظيف', greeting: 'مرحباً معيار، أرغب في التقديم على وظيفة. مرفق سيرتي الذاتية.',
+  },
+}[lang];
+---
+<Base lang={lang} page="careers" title={u.nav.careers} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.careers} subtitle={c.sub} image="/img/about.jpg" />
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.whyKicker}</span><h2>{c.whyTitle}</h2></div>
+      <div class="grid grid-4">
+        {c.why.map((w) => <div class="feature reveal"><div class="icon"><Icon name={w.icon} /></div><h3>{w.title}</h3><p>{w.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.jobsTitle}</h2></div>
+      <div class="placeholder-box jobs-empty reveal"><p>{c.jobsEmpty}</p></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <div class="form-card" id="apply">
+        <h2 style="font-size:28px">{c.formTitle}</h2>
+        <form id="career-form" data-email={site.email} data-subject={c.subject} data-greeting={c.greeting}
+          data-labels={JSON.stringify({ name: c.name, mobile: c.mobile, mail: c.mail, position: c.position, experience: c.experience, message: c.message })}>
+          <div class="form-row">
+            <div class="field"><label for="c-name">{c.name} *</label><input id="c-name" name="name" required /></div>
+            <div class="field"><label for="c-mobile">{c.mobile} *</label><input id="c-mobile" name="mobile" type="tel" required dir="ltr" /></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="c-mail">{c.mail} *</label><input id="c-mail" name="mail" type="email" required dir="ltr" /></div>
+            <div class="field"><label for="c-exp">{c.experience}</label><input id="c-exp" name="experience" type="number" min="0" max="50" dir="ltr" /></div>
+          </div>
+          <div class="field">
+            <label for="c-pos">{c.position}</label>
+            <select id="c-pos" name="position">{c.positions.map((p) => <option value={p}>{p}</option>)}</select>
+          </div>
+          <div class="field"><label for="c-msg">{c.message}</label><textarea id="c-msg" name="message" rows="5"></textarea></div>
+          <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center">{c.send}</button>
+          <div class="form-msg" id="career-msg" role="status">{c.cvNote}</div>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('career-form') as HTMLFormElement | null;
+  const msg = document.getElementById('career-msg');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = form.dataset;
+    const labels = JSON.parse(d.labels || '{}');
+    const data = new FormData(form);
+    const lines = [d.greeting || '', ''];
+    for (const key of ['name', 'mobile', 'mail', 'position', 'experience', 'message']) {
+      const v = String(data.get(key) || '').trim();
+      if (v) lines.push(`${labels[key]}: ${v}`);
+    }
+    const subject = `${d.subject} - ${String(data.get('position') || '')} - ${String(data.get('name') || '')}`;
+    msg?.classList.add('show');
+    location.href = `mailto:${d.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  });
+</script>

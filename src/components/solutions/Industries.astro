@@ -1,0 +1,59 @@
+---
+import Icon from '../Icon.astro';
+import { href, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = t(lang);
+const c = {
+  en: {
+    kicker: 'Industries', title: 'Accounting for every kind of business',
+    text: 'Every sector has its own way of earning and spending. We adapt our bookkeeping, reporting and advice to how your business actually works.',
+    items: [
+      { icon: 'box', title: 'Trading & Distribution', text: 'Purchasing, stock movement, costing and supplier balances.' },
+      { icon: 'store', title: 'Retail & E-commerce', text: 'POS and payment gateway reconciliations, margins by product.' },
+      { icon: 'food', title: 'Restaurants & Cafés', text: 'Delivery platform reconciliations, food cost and branch reports.' },
+      { icon: 'clinic', title: 'Healthcare', text: 'Insurance receivables, equipment assets and service profitability.' },
+      { icon: 'settings', title: 'Contracting & Real Estate', text: 'Project costing, progress billing, rentals and fixed assets.' },
+      { icon: 'briefcase', title: 'Professional Services', text: 'Time-based billing, receivables follow-up and profitability by client.' },
+      { icon: 'users', title: 'Salons, Fitness & Personal Care', text: 'Memberships, commissions and daily sales reconciliations.' },
+      { icon: 'star', title: 'Startups & Home Businesses', text: 'Simple, affordable books from day one.' },
+    ],
+    moreTitle: "Don't see your industry?",
+    moreText: 'We work with businesses of every type and size. Tell us about yours and we will tailor the right scope and price.',
+  },
+  ar: {
+    kicker: 'القطاعات', title: 'محاسبة لكل أنواع الأعمال',
+    text: 'لكل قطاع طريقته الخاصة في الإيرادات والمصروفات. نكيّف مسك الدفاتر والتقارير والاستشارات حسب طبيعة عمل نشاطك.',
+    items: [
+      { icon: 'box', title: 'التجارة والتوزيع', text: 'المشتريات وحركة المخزون والتكاليف وأرصدة الموردين.' },
+      { icon: 'store', title: 'التجزئة والتجارة الإلكترونية', text: 'تسويات نقاط البيع وبوابات الدفع، والأرباح حسب المنتج.' },
+      { icon: 'food', title: 'المطاعم والمقاهي', text: 'تسويات تطبيقات التوصيل، وتكلفة الطعام، وتقارير الفروع.' },
+      { icon: 'clinic', title: 'الرعاية الصحية', text: 'ذمم التأمين، والأصول والمعدات، وربحية الخدمات.' },
+      { icon: 'settings', title: 'المقاولات والعقارات', text: 'تكاليف المشاريع، والمستخلصات، والإيجارات، والأصول الثابتة.' },
+      { icon: 'briefcase', title: 'الخدمات المهنية', text: 'الفوترة حسب الوقت، ومتابعة الذمم، والربحية حسب العميل.' },
+      { icon: 'users', title: 'الصالونات والأندية والعناية الشخصية', text: 'الاشتراكات والعمولات وتسويات المبيعات اليومية.' },
+      { icon: 'star', title: 'المشاريع الناشئة والمنزلية', text: 'حسابات بسيطة وبتكلفة مناسبة من اليوم الأول.' },
+    ],
+    moreTitle: 'لم تجد قطاعك؟',
+    moreText: 'نعمل مع الشركات بمختلف أنواعها وأحجامها. أخبرنا عن نشاطك وسنحدد لك نطاق العمل والسعر المناسبين.',
+  },
+}[lang];
+---
+<div class="sol-block" id="industries">
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.kicker}</span><h2>{c.title}</h2><p>{c.text}</p></div>
+      <div class="grid grid-4">
+        {c.items.map((i) => <div class="feature reveal"><div class="icon"><Icon name={i.icon} /></div><h3>{i.title}</h3><p>{i.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container section-head reveal">
+      <h2>{c.moreTitle}</h2><p>{c.moreText}</p>
+      <a class="btn btn-navy" href={href(lang, 'contact')}>{u.askPrice}</a>
+    </div>
+  </section>
+</div>
