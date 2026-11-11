@@ -13,7 +13,7 @@ const u = t(lang);
 type Block =
   | { kind: 'check' | 'steps'; title: string; items: string[] }
   | { kind: 'cards'; title: string; items: { title: string; text: string }[] };
-type Topic = { id: string; icon: string; kicker: string; title: string; intro: string; blocks: Block[] };
+type Topic = { id: string; icon: string; kicker: string; title: string; summary: string; intro: string; blocks: Block[] };
 
 const c = {
   en: {
@@ -23,7 +23,7 @@ const c = {
     read: 'Read guide',
     topics: [
       {
-        id: 'bookkeeping', icon: 'book', kicker: 'Guide 1', title: 'Bookkeeping basics',
+        id: 'bookkeeping', icon: 'book', kicker: 'Guide 1', title: 'Bookkeeping basics', summary: 'What to record, which documents to keep and a simple monthly routine.',
         intro: 'Bookkeeping is recording every financial transaction of your business (sales, purchases, expenses, salaries and bank movements) in an organised and accurate way. It is the foundation of every report, decision and audit.',
         blocks: [
           { kind: 'check', title: 'Why it matters', items: [
@@ -58,7 +58,7 @@ const c = {
         ],
       },
       {
-        id: 'financial-management', icon: 'chart', kicker: 'Guide 2', title: 'Financial management',
+        id: 'financial-management', icon: 'chart', kicker: 'Guide 2', title: 'Financial management', summary: 'Financial statements, budgets, cash flow and the indicators to watch.',
         intro: 'Financial management is using your numbers to plan, control and grow: knowing where money comes from, where it goes and what to do next.',
         blocks: [
           { kind: 'cards', title: 'The three main financial statements', items: [
@@ -83,7 +83,7 @@ const c = {
         ],
       },
       {
-        id: 'advisory', icon: 'compass', kicker: 'Guide 3', title: 'Financial advisory',
+        id: 'advisory', icon: 'compass', kicker: 'Guide 3', title: 'Financial advisory', summary: 'When to seek advice, how to prepare and what advisory can cover.',
         intro: 'Advisory turns accounting information into decisions. An advisor reviews your numbers with you and helps you plan, solve problems and seize opportunities.',
         blocks: [
           { kind: 'check', title: 'When to seek advice', items: [
@@ -141,7 +141,7 @@ const c = {
     read: 'اقرأ الدليل',
     topics: [
       {
-        id: 'bookkeeping', icon: 'book', kicker: 'الدليل 1', title: 'أساسيات مسك الدفاتر',
+        id: 'bookkeeping', icon: 'book', kicker: 'الدليل 1', title: 'أساسيات مسك الدفاتر', summary: 'ما الذي تسجله، والمستندات التي تحتفظ بها، وروتين شهري بسيط.',
         intro: 'مسك الدفاتر هو تسجيل جميع المعاملات المالية لنشاطك، من مبيعات ومشتريات ومصروفات ورواتب وحركات بنكية، بطريقة منظمة ودقيقة. وهو الأساس لكل تقرير وقرار وتدقيق.',
         blocks: [
           { kind: 'check', title: 'لماذا هو مهم', items: [
@@ -176,7 +176,7 @@ const c = {
         ],
       },
       {
-        id: 'financial-management', icon: 'chart', kicker: 'الدليل 2', title: 'الإدارة المالية',
+        id: 'financial-management', icon: 'chart', kicker: 'الدليل 2', title: 'الإدارة المالية', summary: 'القوائم المالية والموازنات والتدفقات النقدية والمؤشرات التي تتابعها.',
         intro: 'الإدارة المالية هي استخدام أرقامك للتخطيط والرقابة والنمو: أن تعرف من أين تأتي الأموال وأين تذهب وما الخطوة التالية.',
         blocks: [
           { kind: 'cards', title: 'القوائم المالية الثلاث الرئيسية', items: [
@@ -201,7 +201,7 @@ const c = {
         ],
       },
       {
-        id: 'advisory', icon: 'compass', kicker: 'الدليل 3', title: 'الاستشارات المالية',
+        id: 'advisory', icon: 'compass', kicker: 'الدليل 3', title: 'الاستشارات المالية', summary: 'متى تطلب الاستشارة، وكيف تستعد لها، وما الذي تشمله.',
         intro: 'تحوّل الاستشارات المعلومات المحاسبية إلى قرارات. يراجع المستشار أرقامك معك ويساعدك على التخطيط وحل المشكلات واغتنام الفرص.',
         blocks: [
           { kind: 'check', title: 'متى تطلب الاستشارة', items: [
@@ -265,7 +265,7 @@ const c = {
             <div class="icon"><Icon name={tp.icon} /></div>
             <span class="kicker">{tp.kicker}</span>
             <h3>{tp.title}</h3>
-            <p>{tp.intro.split('. ')[0]}.</p>
+            <p>{tp.summary}</p>
             <span class="learn-more">{c.read} <Icon name="arrow" size={16} /></span>
           </a>
         ))}
