@@ -353,11 +353,11 @@ html[dir='rtl'] .learn-more svg, html[dir='rtl'] .learn-topic .learn-more svg { 
 @media (max-width: 700px) { .learn-teaser { flex-direction: column; align-items: flex-start; padding: 26px; } }
 
 .client-logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
-.client-logo { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); height: 140px; display: flex; align-items: center; justify-content: center; padding: 18px; transition: transform .25s, box-shadow .25s; }
+.client-logo { display: block; aspect-ratio: 1 / 1; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; transition: transform .25s, box-shadow .25s; }
 .client-logo:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.client-logo img { width: 100%; height: 100%; object-fit: contain; }
+.client-logo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 1000px) { .client-logos { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .client-logos { grid-template-columns: repeat(2, 1fr); } .client-logo { height: 120px; } }
+@media (max-width: 560px) { .client-logos { grid-template-columns: repeat(2, 1fr); } }
 .logo { flex: none; }
 @media (max-width: 1500px) { .header-cta { display: none; } }
 @media (min-width: 1321px) { .main-nav a { padding-inline: 7px; } }
