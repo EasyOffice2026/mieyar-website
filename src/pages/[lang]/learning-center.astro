@@ -1,0 +1,314 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+
+type Block =
+  | { kind: 'check' | 'steps'; title: string; items: string[] }
+  | { kind: 'cards'; title: string; items: { title: string; text: string }[] };
+type Topic = { id: string; icon: string; kicker: string; title: string; summary: string; intro: string; blocks: Block[] };
+
+const c = {
+  en: {
+    sub: 'Simple guides to help business owners understand bookkeeping, financial management and advisory.',
+    introKicker: 'Learning Center', introTitle: 'Understand your numbers',
+    introText: 'You do not need to be an accountant to run a financially healthy business. These short guides explain the essentials in plain language.',
+    read: 'Read guide',
+    topics: [
+      {
+        id: 'bookkeeping', icon: 'book', kicker: 'Guide 1', title: 'Bookkeeping basics', summary: 'What to record, which documents to keep and a simple monthly routine.',
+        intro: 'Bookkeeping is recording every financial transaction of your business (sales, purchases, expenses, salaries and bank movements) in an organised and accurate way. It is the foundation of every report, decision and audit.',
+        blocks: [
+          { kind: 'check', title: 'Why it matters', items: [
+            'Know your real profit, not a guess',
+            'Control your cash and avoid surprises',
+            'Be ready for auditors, banks and investors',
+            'Meet legal and regulatory requirements',
+            'Keep business and personal money separate',
+          ] },
+          { kind: 'check', title: 'Documents to keep', items: [
+            'Sales invoices and receipts',
+            'Purchase invoices and supplier bills',
+            'Bank statements for every account',
+            'Expense and petty-cash receipts',
+            'Contracts, leases and licences',
+            'Records of assets you buy, such as equipment and vehicles',
+          ] },
+          { kind: 'steps', title: 'A simple monthly routine', items: [
+            'Record all sales, purchases and expenses',
+            'Reconcile each bank account with its statement',
+            'Follow up on what customers owe you and what you owe suppliers',
+            'Review petty cash and expense claims',
+            'Close the month and review your profit and loss',
+          ] },
+          { kind: 'check', title: 'Common mistakes to avoid', items: [
+            'Mixing personal and business expenses',
+            'Not keeping receipts and invoices',
+            'Recording everything only at year end',
+            'Skipping bank reconciliations',
+            'Not tracking unpaid customer invoices',
+          ] },
+        ],
+      },
+      {
+        id: 'financial-management', icon: 'chart', kicker: 'Guide 2', title: 'Financial management', summary: 'Financial statements, budgets, cash flow and the indicators to watch.',
+        intro: 'Financial management is using your numbers to plan, control and grow: knowing where money comes from, where it goes and what to do next.',
+        blocks: [
+          { kind: 'cards', title: 'The three main financial statements', items: [
+            { title: 'Income statement (P&L)', text: 'Revenue minus costs over a period. It shows whether your business is making a profit.' },
+            { title: 'Balance sheet', text: 'What the business owns (assets), what it owes (liabilities) and the owner’s equity on a given date.' },
+            { title: 'Cash-flow statement', text: 'The actual cash coming in and going out. A profitable business can still run out of cash.' },
+          ] },
+          { kind: 'check', title: 'Good practices', items: [
+            'Prepare an annual budget and compare it with actual results every month',
+            'Forecast your cash 3 to 6 months ahead',
+            'Price products and services from their real cost plus a target margin',
+            'Keep a cash reserve for slow months and emergencies',
+            'Review your reports monthly, not once a year',
+          ] },
+          { kind: 'check', title: 'Key indicators to watch', items: [
+            'Gross profit margin: how much you keep from each sale after direct costs',
+            'Net profit margin: what remains after all expenses',
+            'Receivable days: how fast customers pay you',
+            'Current ratio: whether you can cover short-term obligations',
+            'Break-even point: the sales you need to cover all costs',
+          ] },
+        ],
+      },
+      {
+        id: 'advisory', icon: 'compass', kicker: 'Guide 3', title: 'Financial advisory', summary: 'When to seek advice, how to prepare and what advisory can cover.',
+        intro: 'Advisory turns accounting information into decisions. An advisor reviews your numbers with you and helps you plan, solve problems and seize opportunities.',
+        blocks: [
+          { kind: 'check', title: 'When to seek advice', items: [
+            'Starting a new business, branch or product line',
+            'Sales are growing but profit is not',
+            'Cash is always tight',
+            'Planning to borrow, raise funds or bring in a partner',
+            'Setting or reviewing your prices',
+            'Choosing or changing an accounting system',
+          ] },
+          { kind: 'steps', title: 'How to prepare for a consultation', items: [
+            'Gather your financial reports or bank statements for the last 12 months',
+            'Write down your goal or the problem you want to solve',
+            'List your key numbers: sales, main costs, staff and loans',
+            'Prepare your questions',
+          ] },
+          { kind: 'cards', title: 'What advisory can cover', items: [
+            { title: 'Feasibility studies', text: 'Test whether a new project is worth the investment before you commit.' },
+            { title: 'Costing and pricing', text: 'Know the true cost of each product or service and price it profitably.' },
+            { title: 'Internal controls', text: 'Policies and approvals that protect your cash, stock and assets.' },
+          ] },
+        ],
+      },
+    ] as Topic[],
+    glossaryTitle: 'Glossary', glossaryKicker: 'Key terms',
+    glossary: [
+      { term: 'Assets', def: 'Everything the business owns: cash, stock, equipment and money owed by customers.' },
+      { term: 'Liabilities', def: 'What the business owes: supplier bills, loans and other obligations.' },
+      { term: 'Equity', def: 'The owner’s share of the business: assets minus liabilities.' },
+      { term: 'Revenue', def: 'Income from selling products or services, before any costs.' },
+      { term: 'Gross profit', def: 'Revenue minus the direct cost of the goods or services sold.' },
+      { term: 'Net profit', def: 'What remains after all costs and expenses are deducted.' },
+      { term: 'Accounts receivable', def: 'Money customers owe you for sales already made.' },
+      { term: 'Accounts payable', def: 'Money you owe suppliers for purchases already received.' },
+      { term: 'Accrual basis', def: 'Recording income and expenses when they occur, not when cash moves.' },
+      { term: 'Depreciation', def: 'Spreading the cost of an asset, such as equipment, over its useful life.' },
+      { term: 'Reconciliation', def: 'Matching your records with bank or supplier statements to find differences.' },
+      { term: 'Break-even point', def: 'The level of sales at which total revenue equals total costs.' },
+    ],
+    faqTitle: 'Frequently asked questions',
+    faq: [
+      { q: 'What is the difference between bookkeeping and accounting?', a: 'Bookkeeping records transactions day to day. Accounting uses those records to prepare financial statements, analyse results and support decisions.' },
+      { q: 'Does a small business really need professional bookkeeping?', a: 'Yes. Accurate books show your real profit and cash, help you avoid penalties and make it much easier to get bank finance or bring in investors.' },
+      { q: 'How often should I review my financial reports?', a: 'At least once a month. Monthly reports let you spot problems early, while there is still time to act.' },
+      { q: 'Can I manage my books in a spreadsheet?', a: 'A very small business can start with a spreadsheet, but accounting software reduces errors, saves time and produces reports automatically as you grow.' },
+      { q: 'Why is my business profitable but short of cash?', a: 'Profit and cash are different. Unpaid customer invoices, stock, loan repayments and asset purchases all use cash without reducing profit.' },
+      { q: 'When should I consult a financial advisor?', a: 'Before big decisions such as opening a branch, taking a loan or changing prices, and whenever results are not what you expect.' },
+    ],
+    disclaimer: 'This material is general guidance only and is not professional advice for your specific situation. Contact us for advice tailored to your business.',
+  },
+  ar: {
+    sub: 'أدلة مبسّطة تساعد أصحاب الأعمال على فهم مسك الدفاتر والإدارة المالية والاستشارات.',
+    introKicker: 'مركز المعرفة', introTitle: 'افهم أرقامك',
+    introText: 'لا تحتاج إلى أن تكون محاسباً لتدير عملاً سليماً مالياً. تشرح هذه الأدلة القصيرة الأساسيات بلغة بسيطة.',
+    read: 'اقرأ الدليل',
+    topics: [
+      {
+        id: 'bookkeeping', icon: 'book', kicker: 'الدليل 1', title: 'أساسيات مسك الدفاتر', summary: 'ما الذي تسجله، والمستندات التي تحتفظ بها، وروتين شهري بسيط.',
+        intro: 'مسك الدفاتر هو تسجيل جميع المعاملات المالية لنشاطك، من مبيعات ومشتريات ومصروفات ورواتب وحركات بنكية، بطريقة منظمة ودقيقة. وهو الأساس لكل تقرير وقرار وتدقيق.',
+        blocks: [
+          { kind: 'check', title: 'لماذا هو مهم', items: [
+            'معرفة ربحك الحقيقي بدلاً من التخمين',
+            'التحكم في السيولة وتجنب المفاجآت',
+            'الجاهزية للمدققين والبنوك والمستثمرين',
+            'الالتزام بالمتطلبات القانونية والتنظيمية',
+            'الفصل بين أموال النشاط والأموال الشخصية',
+          ] },
+          { kind: 'check', title: 'المستندات التي يجب الاحتفاظ بها', items: [
+            'فواتير المبيعات والإيصالات',
+            'فواتير المشتريات ومطالبات الموردين',
+            'كشوف الحسابات البنكية لكل حساب',
+            'إيصالات المصروفات والعُهد النقدية',
+            'العقود وعقود الإيجار والتراخيص',
+            'سجلات الأصول المشتراة مثل المعدات والسيارات',
+          ] },
+          { kind: 'steps', title: 'روتين شهري بسيط', items: [
+            'سجّل جميع المبيعات والمشتريات والمصروفات',
+            'طابق كل حساب بنكي مع كشف الحساب',
+            'تابع المبالغ المستحقة لك من العملاء والمستحقة عليك للموردين',
+            'راجع العُهد النقدية ومطالبات المصروفات',
+            'أقفل الشهر وراجع قائمة الأرباح والخسائر',
+          ] },
+          { kind: 'check', title: 'أخطاء شائعة يجب تجنبها', items: [
+            'خلط المصروفات الشخصية بمصروفات النشاط',
+            'عدم الاحتفاظ بالإيصالات والفواتير',
+            'تسجيل كل شيء في نهاية السنة فقط',
+            'إهمال المطابقات البنكية',
+            'عدم متابعة فواتير العملاء غير المدفوعة',
+          ] },
+        ],
+      },
+      {
+        id: 'financial-management', icon: 'chart', kicker: 'الدليل 2', title: 'الإدارة المالية', summary: 'القوائم المالية والموازنات والتدفقات النقدية والمؤشرات التي تتابعها.',
+        intro: 'الإدارة المالية هي استخدام أرقامك للتخطيط والرقابة والنمو: أن تعرف من أين تأتي الأموال وأين تذهب وما الخطوة التالية.',
+        blocks: [
+          { kind: 'cards', title: 'القوائم المالية الثلاث الرئيسية', items: [
+            { title: 'قائمة الدخل (الأرباح والخسائر)', text: 'الإيرادات مطروحاً منها التكاليف خلال فترة، وتوضح هل يحقق نشاطك ربحاً.' },
+            { title: 'الميزانية العمومية', text: 'ما يملكه النشاط (الأصول) وما عليه (الالتزامات) وحقوق المالك في تاريخ معين.' },
+            { title: 'قائمة التدفقات النقدية', text: 'النقد الفعلي الداخل والخارج. قد يحقق النشاط ربحاً ومع ذلك تنفد سيولته.' },
+          ] },
+          { kind: 'check', title: 'ممارسات جيدة', items: [
+            'إعداد موازنة سنوية ومقارنتها بالنتائج الفعلية كل شهر',
+            'توقع التدفقات النقدية لمدة 3 إلى 6 أشهر قادمة',
+            'تسعير المنتجات والخدمات على أساس تكلفتها الحقيقية مع هامش مستهدف',
+            'الاحتفاظ باحتياطي نقدي للأشهر الهادئة والطوارئ',
+            'مراجعة التقارير شهرياً وليس مرة في السنة',
+          ] },
+          { kind: 'check', title: 'مؤشرات رئيسية للمتابعة', items: [
+            'هامش الربح الإجمالي: ما يتبقى من كل عملية بيع بعد التكاليف المباشرة',
+            'هامش صافي الربح: ما يتبقى بعد جميع المصروفات',
+            'أيام التحصيل: مدى سرعة سداد العملاء',
+            'نسبة التداول: قدرتك على الوفاء بالالتزامات قصيرة الأجل',
+            'نقطة التعادل: حجم المبيعات اللازم لتغطية جميع التكاليف',
+          ] },
+        ],
+      },
+      {
+        id: 'advisory', icon: 'compass', kicker: 'الدليل 3', title: 'الاستشارات المالية', summary: 'متى تطلب الاستشارة، وكيف تستعد لها، وما الذي تشمله.',
+        intro: 'تحوّل الاستشارات المعلومات المحاسبية إلى قرارات. يراجع المستشار أرقامك معك ويساعدك على التخطيط وحل المشكلات واغتنام الفرص.',
+        blocks: [
+          { kind: 'check', title: 'متى تطلب الاستشارة', items: [
+            'عند بدء نشاط أو فرع أو خط منتجات جديد',
+            'عندما تنمو المبيعات ولا تنمو الأرباح',
+            'عندما تكون السيولة ضيقة دائماً',
+            'عند التخطيط للاقتراض أو جمع تمويل أو إدخال شريك',
+            'عند وضع أسعارك أو مراجعتها',
+            'عند اختيار نظام محاسبي أو تغييره',
+          ] },
+          { kind: 'steps', title: 'كيف تستعد للاستشارة', items: [
+            'اجمع تقاريرك المالية أو كشوفك البنكية لآخر 12 شهراً',
+            'اكتب هدفك أو المشكلة التي تريد حلها',
+            'دوّن أرقامك الرئيسية: المبيعات والتكاليف الأساسية والموظفين والقروض',
+            'جهّز أسئلتك',
+          ] },
+          { kind: 'cards', title: 'ما الذي تشمله الاستشارات', items: [
+            { title: 'دراسات الجدوى', text: 'اختبار جدوى المشروع الجديد قبل الالتزام بالاستثمار.' },
+            { title: 'التكاليف والتسعير', text: 'معرفة التكلفة الحقيقية لكل منتج أو خدمة وتسعيرها بربحية.' },
+            { title: 'الرقابة الداخلية', text: 'سياسات وصلاحيات تحمي أموالك ومخزونك وأصولك.' },
+          ] },
+        ],
+      },
+    ] as Topic[],
+    glossaryTitle: 'المصطلحات', glossaryKicker: 'مصطلحات أساسية',
+    glossary: [
+      { term: 'الأصول', def: 'كل ما يملكه النشاط: النقد والمخزون والمعدات والمبالغ المستحقة من العملاء.' },
+      { term: 'الالتزامات', def: 'ما على النشاط: فواتير الموردين والقروض والالتزامات الأخرى.' },
+      { term: 'حقوق الملكية', def: 'حصة المالك في النشاط: الأصول مطروحاً منها الالتزامات.' },
+      { term: 'الإيرادات', def: 'الدخل من بيع المنتجات أو الخدمات قبل خصم أي تكاليف.' },
+      { term: 'الربح الإجمالي', def: 'الإيرادات مطروحاً منها التكلفة المباشرة للبضائع أو الخدمات المباعة.' },
+      { term: 'صافي الربح', def: 'ما يتبقى بعد خصم جميع التكاليف والمصروفات.' },
+      { term: 'الذمم المدينة', def: 'المبالغ المستحقة لك من العملاء عن مبيعات تمت.' },
+      { term: 'الذمم الدائنة', def: 'المبالغ المستحقة عليك للموردين عن مشتريات تم استلامها.' },
+      { term: 'أساس الاستحقاق', def: 'تسجيل الإيرادات والمصروفات عند حدوثها وليس عند تحرك النقد.' },
+      { term: 'الإهلاك', def: 'توزيع تكلفة الأصل، مثل المعدات، على مدى عمره الإنتاجي.' },
+      { term: 'المطابقة', def: 'مقارنة سجلاتك مع كشوف البنك أو الموردين لاكتشاف الفروقات.' },
+      { term: 'نقطة التعادل', def: 'حجم المبيعات الذي تتساوى عنده الإيرادات مع إجمالي التكاليف.' },
+    ],
+    faqTitle: 'الأسئلة الشائعة',
+    faq: [
+      { q: 'ما الفرق بين مسك الدفاتر والمحاسبة؟', a: 'مسك الدفاتر هو تسجيل المعاملات يوماً بيوم، أما المحاسبة فتستخدم هذه السجلات لإعداد القوائم المالية وتحليل النتائج ودعم القرارات.' },
+      { q: 'هل يحتاج النشاط الصغير فعلاً إلى مسك دفاتر احترافي؟', a: 'نعم. الدفاتر الدقيقة توضح ربحك وسيولتك الحقيقيين، وتساعدك على تجنب الغرامات، وتسهّل الحصول على تمويل بنكي أو إدخال مستثمرين.' },
+      { q: 'كم مرة يجب أن أراجع تقاريري المالية؟', a: 'مرة في الشهر على الأقل. التقارير الشهرية تكشف المشكلات مبكراً حين لا يزال هناك وقت للتصرف.' },
+      { q: 'هل يمكنني إدارة حساباتي في جدول بيانات؟', a: 'يمكن للنشاط الصغير جداً أن يبدأ بجدول بيانات، لكن البرامج المحاسبية تقلل الأخطاء وتوفر الوقت وتُعد التقارير تلقائياً مع نموك.' },
+      { q: 'لماذا يحقق نشاطي ربحاً لكن سيولته ضعيفة؟', a: 'الربح يختلف عن النقد. فواتير العملاء غير المحصلة والمخزون وأقساط القروض وشراء الأصول كلها تستهلك النقد دون أن تقلل الربح.' },
+      { q: 'متى يجب أن أستشير مستشاراً مالياً؟', a: 'قبل القرارات الكبيرة مثل افتتاح فرع أو أخذ قرض أو تغيير الأسعار، وكلما جاءت النتائج على غير ما تتوقع.' },
+    ],
+    disclaimer: 'هذه المادة إرشادات عامة فقط وليست استشارة مهنية لحالتك الخاصة. تواصل معنا للحصول على استشارة تناسب نشاطك.',
+  },
+}[lang];
+---
+<Base lang={lang} page="learn" title={u.nav.learn} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.learn} subtitle={c.sub} image="/img/documents.jpg" />
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.introKicker}</span><h2>{c.introTitle}</h2><p>{c.introText}</p></div>
+      <div class="grid grid-3">
+        {c.topics.map((tp) => (
+          <a class="feature learn-topic reveal" href={`#${tp.id}`}>
+            <div class="icon"><Icon name={tp.icon} /></div>
+            <span class="kicker">{tp.kicker}</span>
+            <h3>{tp.title}</h3>
+            <p>{tp.summary}</p>
+            <span class="learn-more">{c.read} <Icon name="arrow" size={16} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  {c.topics.map((tp, i) => (
+    <section id={tp.id} class:list={['section', 'learn-section', i % 2 === 0 && 'alt']}>
+      <div class="container">
+        <div class="section-head reveal"><span class="kicker">{tp.kicker}</span><h2>{tp.title}</h2><p>{tp.intro}</p></div>
+        <div class="learn-blocks">
+          {tp.blocks.map((b) => (
+            <div class:list={['learn-block', 'reveal', b.kind === 'cards' && 'wide']}>
+              <h3>{b.title}</h3>
+              {b.kind === 'cards' ? (
+                <div class="grid grid-3">{b.items.map((it) => <div class="learn-card"><h4>{it.title}</h4><p>{it.text}</p></div>)}</div>
+              ) : b.kind === 'steps' ? (
+                <ol class="learn-steps">{b.items.map((it) => <li>{it}</li>)}</ol>
+              ) : (
+                <ul class="checklist">{b.items.map((it) => <li>{it}</li>)}</ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+  <section id="glossary" class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.glossaryKicker}</span><h2>{c.glossaryTitle}</h2></div>
+      <dl class="glossary">
+        {c.glossary.map((g) => <div class="reveal"><dt>{g.term}</dt><dd>{g.def}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+  <section id="faq" class="section alt">
+    <div class="container" style="max-width:860px">
+      <div class="section-head reveal"><h2>{c.faqTitle}</h2></div>
+      <div class="faq">
+        {c.faq.map((f) => <details class="reveal"><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+      <p class="learn-disclaimer">{c.disclaimer}</p>
+    </div>
+  </section>
+  <Cta lang={lang} />
+</Base>

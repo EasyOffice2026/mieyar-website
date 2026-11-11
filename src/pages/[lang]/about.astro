@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'A Kuwaiti accounting consultancy built on accuracy, integrity and practical advice.',
+    kicker: 'Who we are',
+    title: 'Your financial partner in Kuwait',
+    p: [
+      'Mieyar Accounting Consultancy provides bookkeeping, financial management and advisory services to businesses of every size and sector across Kuwait.',
+      'Our name, Mieyar (معيار), means "standard" in Arabic, and that is exactly what we bring to every client: a high, consistent standard of accounting that business owners can rely on.',
+      'We combine solid accounting practice with a real understanding of how local businesses operate, from WPS payroll and PIFSS to delivery-platform settlements and Zakat. The result is clean books, clear reports and advice you can act on.',
+    ],
+    mission: 'Our Mission', missionText: 'To give every business in Kuwait access to accurate, timely and understandable financial information that supports better decisions.',
+    vision: 'Our Vision', visionText: 'To be the accounting partner of choice for growing businesses in Kuwait, known for setting the standard in quality and trust.',
+    valuesKicker: 'Our values', valuesTitle: 'What we stand for',
+    values: [
+      { icon: 'scale', title: 'Accuracy', text: 'Precise, reconciled and reviewed work.' },
+      { icon: 'shield', title: 'Integrity', text: 'Honest advice, even when it is hard to hear.' },
+      { icon: 'lock', title: 'Confidentiality', text: 'Your data stays private, always.' },
+      { icon: 'users', title: 'Partnership', text: 'We grow when our clients grow.' },
+    ],
+  },
+  ar: {
+    sub: 'شركة استشارات محاسبية كويتية قائمة على الدقة والنزاهة والنصيحة العملية.',
+    kicker: 'من نحن',
+    title: 'شريكك المالي في الكويت',
+    p: [
+      'تقدم شركة معيار للاستشارات المحاسبية خدمات مسك الدفاتر والإدارة المالية والاستشارات للشركات بمختلف أحجامها وقطاعاتها في الكويت.',
+      'اسمنا "معيار" يعبر عما نقدمه لكل عميل: مستوى عالٍ وثابت من العمل المحاسبي يمكن لأصحاب الأعمال الاعتماد عليه.',
+      'نجمع بين الممارسة المحاسبية السليمة والفهم الحقيقي لطبيعة الأعمال المحلية، من رواتب نظام حماية الأجور والتأمينات الاجتماعية إلى تسويات منصات التوصيل والزكاة. والنتيجة: حسابات منظمة، وتقارير واضحة، ونصائح قابلة للتطبيق.',
+    ],
+    mission: 'رسالتنا', missionText: 'أن نوفر لكل شركة في الكويت معلومات مالية دقيقة وفي وقتها وسهلة الفهم تدعم اتخاذ قرارات أفضل.',
+    vision: 'رؤيتنا', visionText: 'أن نكون الشريك المحاسبي المفضل للشركات النامية في الكويت، وأن نُعرف بوضع المعيار في الجودة والثقة.',
+    valuesKicker: 'قيمنا', valuesTitle: 'ما نؤمن به',
+    values: [
+      { icon: 'scale', title: 'الدقة', text: 'عمل دقيق ومُسوّى ومُراجع.' },
+      { icon: 'shield', title: 'النزاهة', text: 'نصيحة صادقة حتى لو كانت صعبة.' },
+      { icon: 'lock', title: 'السرية', text: 'بياناتك تبقى خاصة دائماً.' },
+      { icon: 'users', title: 'الشراكة', text: 'ننمو عندما ينمو عملاؤنا.' },
+    ],
+  },
+}[lang];
+---
+<Base lang={lang} page="about" title={u.nav.about} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.about} subtitle={c.sub} image="/img/about.jpg" />
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="kicker">{c.kicker}</span>
+        <h2>{c.title}</h2>
+        {c.p.map((p) => <p>{p}</p>)}
+      </div>
+      <img class="reveal" src="/img/documents.jpg" alt="" loading="lazy" />
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container grid grid-2">
+      <div class="feature reveal"><div class="icon"><Icon name="target" /></div><h3>{c.mission}</h3><p>{c.missionText}</p></div>
+      <div class="feature reveal"><div class="icon"><Icon name="eye" /></div><h3>{c.vision}</h3><p>{c.visionText}</p></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.valuesKicker}</span><h2>{c.valuesTitle}</h2></div>
+      <div class="grid grid-4">
+        {c.values.map((v) => (
+          <div class="feature value reveal"><div class="icon"><Icon name={v.icon} /></div><h3>{v.title}</h3><p>{v.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Cta lang={lang} />
+</Base>

@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const c = {
+  en: {
+    sub: 'Strategic and financial advice that turns your numbers into a plan.',
+    groups: [
+      { icon: 'compass', img: '/img/advisory.jpg', title: 'Business Strategy', text: 'Moving from startup mode to growth mode starts with the fundamentals. We review the numbers across your business and build a practical, data-driven roadmap.',
+        items: ['Business plans', 'Feasibility studies', 'Market research', 'Growth and scaling strategies', 'Business development', 'Mentoring for founders'] },
+      { icon: 'chart', img: '/img/analytics.jpg', title: 'Financial Advisory', text: 'Understand what drives your profit and cash, and make decisions with confidence.',
+        items: ['Financial analysis and strategy', 'Budgeting and forecasting', 'Costing and pricing', 'Business valuation', 'Benchmarking against your sector', 'Bank and investor presentations'] },
+      { icon: 'settings', img: '/img/documents.jpg', title: 'Process & Controls', text: 'As businesses grow, processes have to keep up. We design clear workflows, KPIs and controls, supported by the right systems.',
+        items: ['Organisational structure review', 'Process mapping and improvement', 'Internal controls and governance', 'Risk assessment', 'Accounting system selection and setup', 'KPI frameworks and dashboards'] },
+    ],
+  },
+  ar: {
+    sub: 'استشارات استراتيجية ومالية تحوّل أرقامك إلى خطة عمل.',
+    groups: [
+      { icon: 'compass', img: '/img/advisory.jpg', title: 'استراتيجية الأعمال', text: 'الانتقال من مرحلة التأسيس إلى مرحلة النمو يبدأ بالأساسيات. نراجع أرقام أعمالك بالكامل ونضع خارطة طريق عملية مبنية على البيانات.',
+        items: ['خطط العمل', 'دراسات الجدوى', 'أبحاث السوق', 'استراتيجيات النمو والتوسع', 'تطوير الأعمال', 'الإرشاد لرواد الأعمال'] },
+      { icon: 'chart', img: '/img/analytics.jpg', title: 'الاستشارات المالية', text: 'افهم ما الذي يحرك أرباحك وسيولتك، واتخذ قراراتك بثقة.',
+        items: ['التحليل والاستراتيجية المالية', 'إعداد الموازنات والتوقعات', 'احتساب التكاليف والتسعير', 'تقييم الأعمال', 'المقارنة مع قطاعك', 'العروض المقدمة للبنوك والمستثمرين'] },
+      { icon: 'settings', img: '/img/documents.jpg', title: 'الإجراءات والرقابة', text: 'مع نمو الأعمال يجب أن تواكبها الإجراءات. نصمم سير عمل واضحاً ومؤشرات أداء وضوابط رقابية مدعومة بالأنظمة المناسبة.',
+        items: ['مراجعة الهيكل التنظيمي', 'رسم الإجراءات وتطويرها', 'الرقابة الداخلية والحوكمة', 'تقييم المخاطر', 'اختيار الأنظمة المحاسبية وإعدادها', 'أطر مؤشرات الأداء ولوحات المتابعة'] },
+    ],
+  },
+}[lang];
+---
+<Base lang={lang} page="advisory" title={u.nav.advisory} description={c.sub}>
+  <PageHero lang={lang} title={u.nav.advisory} subtitle={c.sub} image="/img/analytics.jpg" />
+  {c.groups.map((g, i) => (
+    <section class:list={['section', i % 2 === 1 && 'alt']}>
+      <div class:list={['container', 'split', i % 2 === 1 && 'reverse']}>
+        <div class="reveal">
+          <div class="feature" style="padding:0;border:0;background:none"><div class="icon"><Icon name={g.icon} /></div></div>
+          <h2>{g.title}</h2>
+          <p>{g.text}</p>
+          <ul class="checklist cols">{g.items.map((it) => <li>{it}</li>)}</ul>
+        </div>
+        <img class="reveal" src={g.img} alt="" loading="lazy" />
+      </div>
+    </section>
+  ))}
+  <Cta lang={lang} />
+</Base>

@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import Plans from '../../components/solutions/Plans.astro';
+import Industries from '../../components/solutions/Industries.astro';
+import { langs, type Lang } from '../../site';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+const u = t(lang);
+const sub = {
+  en: 'Financial planning and accounting solutions for businesses in every industry, all in one place.',
+  ar: 'حلول التخطيط المالي والمحاسبة للشركات في جميع القطاعات، في مكان واحد.',
+}[lang];
+const tabs = [
+  { id: 'plans', icon: 'briefcase', label: u.nav.plans },
+  { id: 'industries', icon: 'store', label: u.nav.industries },
+] as const;
+---
+<Base lang={lang} page="solutions" title={u.nav.solutions} description={sub}>
+  <PageHero lang={lang} title={u.nav.solutions} subtitle={sub} image="/img/sme.jpg" />
+  <nav class="sol-tabs" aria-label={u.nav.solutions}>
+    <div class="container">
+      {tabs.map((tab) => <a href={`#${tab.id}`} data-tab={tab.id}><Icon name={tab.icon} size={18} /> {tab.label}</a>)}
+    </div>
+  </nav>
+  <Plans lang={lang} />
+  <Industries lang={lang} />
+  <Cta lang={lang} />
+</Base>
+
+<script>
+  const aliases: Record<string, string> = { sme: 'plans', clinics: 'industries', inventory: 'industries' };
+  const old = aliases[location.hash.slice(1)];
+  if (old) { history.replaceState(null, '', `#${old}`); document.getElementById(old)?.scrollIntoView(); }
+  const links = document.querySelectorAll<HTMLAnchorElement>('.sol-tabs a');
+  const setActive = (id: string) => links.forEach((a) => a.classList.toggle('active', a.dataset.tab === id));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('.sol-block').forEach((el) => io.observe(el));
+  setActive(location.hash.slice(1) || 'plans');
+</script>

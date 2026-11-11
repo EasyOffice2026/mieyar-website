@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { href, type Lang } from '../site';
+import { t } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const u = t(lang);
+---
+<section class="cta">
+  <div class="container inner">
+    <div>
+      <h2>{u.ctaTitle}</h2>
+      <p>{u.ctaText}</p>
+    </div>
+    <a class="btn btn-gold" href={href(lang, 'contact')}>{u.letsTalk} <Icon name="arrow" size={18} /></a>
+  </div>
+</section>
