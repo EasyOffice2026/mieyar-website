@@ -3,7 +3,7 @@ export const site = {
   phone: '+965 51414302',
   whatsapp: '96551414302', // international format without + or spaces, e.g. 96512345678
   email: 'mieyar.consulting@gmail.com',
-  instagram: 'mieyar.consulting', // handle without @
+  instagram: 'mieyar.accounting', // handle without @
   x: 'mieyar_co', // X (Twitter) handle without @
   linkedin: 'mieyar-accounting', // linkedin.com/company/<slug>
   address: {
