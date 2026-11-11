@@ -355,7 +355,7 @@ html[dir='rtl'] .learn-more svg, html[dir='rtl'] .learn-topic .learn-more svg { 
 .client-logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
 .client-logo { display: block; aspect-ratio: 1 / 1; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; transition: transform .25s, box-shadow .25s; }
 .client-logo:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-.client-logo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.client-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
 @media (max-width: 1000px) { .client-logos { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .client-logos { grid-template-columns: repeat(2, 1fr); } }
 .logo { flex: none; }
