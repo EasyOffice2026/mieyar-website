@@ -124,7 +124,6 @@ export const smePackages: Record<Lang, Pkg[]> = {
         'Recommended selling prices',
         '1-year cash-flow plan',
         '1-year financial feasibility study',
-        '1-year marketing outline',
       ],
     },
     {
@@ -141,7 +140,6 @@ export const smePackages: Record<Lang, Pkg[]> = {
         '2-year cash-flow plan',
         '2-year sales targets',
         '2-year financial feasibility study',
-        '1-year marketing outline',
       ],
     },
     {
@@ -173,7 +171,6 @@ export const smePackages: Record<Lang, Pkg[]> = {
         'اقتراح أسعار البيع المناسبة',
         'خطة تدفقات نقدية لمدة سنة',
         'دراسة جدوى مالية لمدة سنة',
-        'إطار تسويقي لمدة سنة',
       ],
     },
     {
@@ -190,7 +187,6 @@ export const smePackages: Record<Lang, Pkg[]> = {
         'خطة تدفقات نقدية لمدة سنتين',
         'أهداف مبيعات لمدة سنتين',
         'دراسة جدوى مالية لمدة سنتين',
-        'إطار تسويقي لمدة سنة',
       ],
     },
     {
