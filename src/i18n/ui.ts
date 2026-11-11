@@ -31,7 +31,7 @@ export const ui = {
     popular: 'Most popular',
     comingSoon: 'Coming soon',
     footerAbout:
-      'Mieyar Accounting Consultancy helps businesses in Kuwait keep accurate books, understand their numbers and make confident financial decisions.',
+      'Mieyar Accounting Consultancy helps businesses in Kuwait to keep accurate books, understand their numbers and make confident financial decisions.',
     quickLinks: 'Quick Links',
     services: 'Services',
     contact: 'Contact',
