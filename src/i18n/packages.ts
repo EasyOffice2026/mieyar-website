@@ -38,8 +38,6 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
       features: [
         'Everything in Essential',
         'Accounts payable & receivable management',
-        'Payroll for up to 10 employees (WPS & PIFSS)',
-        'Indemnity and end-of-service calculations',
         'Weekly bank and platform reconciliation',
         'Management reports tailored to your goals',
         '4 on-site visits per month',
@@ -53,7 +51,6 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
       desc: 'For established businesses that need complete accounting and reporting.',
       features: [
         'Everything in Growth',
-        'Payroll for up to 20 employees',
         'Stock movement tracking and inventory control',
         'Cost accounting and pricing analysis',
         'Fixed-asset register and depreciation',
@@ -90,8 +87,6 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
       features: [
         'جميع خدمات الباقة الأساسية',
         'إدارة الذمم الدائنة والمدينة',
-        'الرواتب لغاية 10 موظفين (نظام حماية الأجور والتأمينات)',
-        'احتساب مكافأة نهاية الخدمة',
         'تسوية أسبوعية للحسابات البنكية والمنصات',
         'تقارير إدارية مصممة حسب أهدافك',
         '4 زيارات ميدانية شهرياً',
@@ -105,7 +100,6 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
       desc: 'للشركات القائمة التي تحتاج إلى محاسبة وتقارير مالية متكاملة.',
       features: [
         'جميع خدمات باقة النمو',
-        'الرواتب لغاية 20 موظفاً',
         'متابعة حركة المخزون والرقابة عليه',
         'محاسبة التكاليف وتحليل التسعير',
         'سجل الأصول الثابتة واحتساب الإهلاك',
@@ -220,14 +214,12 @@ export const smePackages: Record<Lang, Pkg[]> = {
 
 export const addOns: Record<Lang, string[]> = {
   en: [
-    'Payroll for additional employees',
     'Accounting system setup and migration',
     'Staff training on accounting systems',
     'Audit preparation and liaison with auditors',
     'Inventory stocktaking',
   ],
   ar: [
-    'رواتب الموظفين الإضافيين',
     'إعداد الأنظمة المحاسبية ونقل البيانات',
     'تدريب الموظفين على الأنظمة المحاسبية',
     'التحضير للتدقيق والتنسيق مع المدققين',
