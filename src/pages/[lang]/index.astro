@@ -14,7 +14,12 @@ const u = t(lang);
 const c = {
   en: {
     eyebrow: 'Mieyar Accounting Consultancy',
-    h1a: 'Clarity', h1b: 'in every number. Confidence in every decision.',
+    slogans: [
+      ['The ', 'standard', ' your finances deserve.'],
+      ['We keep the ', 'books', '. You grow the business.'],
+      ['Turning your numbers into ', 'strategy', '.'],
+      ['Smart ', 'numbers', '. Smarter decisions.'],
+    ],
     lead: 'Bookkeeping, financial management and advisory for businesses in Kuwait. Accurate books, timely reports and clear advice, so you can focus on growing your business.',
     servicesKicker: 'What we do',
     servicesTitle: 'Three services, one trusted partner',
@@ -33,7 +38,7 @@ const c = {
       { img: '/img/analytics.jpg', title: 'Growing Companies', text: 'Monthly accounting and KPIs', link: 'accounting' },
     ],
     whyKicker: 'Why Mieyar',
-    whyTitle: 'The standard your numbers deserve',
+    whyTitle: 'Why businesses choose us',
     why: [
       { icon: 'scale', title: 'Accuracy first', text: 'Every entry is reviewed and reconciled, so your reports are reliable.' },
       { icon: 'map', title: 'Local expertise', text: 'We know Kuwait: WPS, PIFSS, indemnity, Zakat and local banking practice.' },
@@ -54,7 +59,12 @@ const c = {
   },
   ar: {
     eyebrow: 'شركة معيار للاستشارات المحاسبية',
-    h1a: 'وضوح', h1b: 'في كل رقم، وثقة في كل قرار.',
+    slogans: [
+      ['', 'المعيار', ' الذي تستحقه حساباتك.'],
+      ['نحن ندير ', 'حساباتك', '، وأنت تنمّي أعمالك.'],
+      ['نحوّل أرقامك إلى ', 'استراتيجية', '.'],
+      ['', 'أرقام', ' ذكية.. لقرارات أذكى.'],
+    ],
     lead: 'خدمات مسك الدفاتر والإدارة المالية والاستشارات للشركات في الكويت. حسابات دقيقة وتقارير في وقتها ونصيحة واضحة، لتتفرغ أنت لتنمية أعمالك.',
     servicesKicker: 'ماذا نقدم',
     servicesTitle: 'ثلاث خدمات وشريك واحد موثوق',
@@ -73,7 +83,7 @@ const c = {
       { img: '/img/analytics.jpg', title: 'الشركات النامية', text: 'محاسبة شهرية ومؤشرات أداء', link: 'accounting' },
     ],
     whyKicker: 'لماذا معيار',
-    whyTitle: 'المعيار الذي تستحقه أرقامك',
+    whyTitle: 'لماذا تختارنا الشركات',
     why: [
       { icon: 'scale', title: 'الدقة أولاً', text: 'نراجع ونسوّي كل قيد لتكون تقاريرك موثوقة.' },
       { icon: 'map', title: 'خبرة محلية', text: 'نعرف السوق الكويتي: حماية الأجور، والتأمينات الاجتماعية، ومكافأة نهاية الخدمة، والزكاة.' },
@@ -100,7 +110,9 @@ const c = {
     <div class="container">
       <div class="hero-content">
         <div class="eyebrow">{c.eyebrow}</div>
-        <h1><em>{c.h1a}</em> {c.h1b}</h1>
+        <h1 class="slogans" aria-live="polite">
+          {c.slogans.map(([a, b, d], i) => <span class:list={['slogan', i === 0 && 'on']} aria-hidden={i === 0 ? undefined : 'true'}>{a}<em>{b}</em>{d}</span>)}
+        </h1>
         <p class="lead">{c.lead}</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href={href(lang, 'accounting')}>{u.viewPackages} <Icon name="arrow" size={18} /></a>
@@ -197,3 +209,15 @@ const c = {
 
   <Cta lang={lang} />
 </Base>
+
+<script>
+  const slogans = [...document.querySelectorAll<HTMLElement>('.hero .slogan')];
+  if (slogans.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => {
+      slogans[i].classList.remove('on'); slogans[i].setAttribute('aria-hidden', 'true');
+      i = (i + 1) % slogans.length;
+      slogans[i].classList.add('on'); slogans[i].removeAttribute('aria-hidden');
+    }, 4000);
+  }
+</script>
