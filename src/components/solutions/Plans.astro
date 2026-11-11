@@ -2,46 +2,51 @@
 import Icon from '../Icon.astro';
 import PackageCard from '../PackageCard.astro';
 import { type Lang } from '../../site';
+import { t } from '../../i18n/ui';
 import { smePackages } from '../../i18n/packages';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const u = t(lang);
 const c = {
   en: {
-    kicker: 'Business plans', title: 'Start with the right numbers',
-    text: 'Whether you are launching a new project or expanding an existing business, know your costs, your prices and when you will break even before you invest. Our business plan gives owners, banks and investors a clear, realistic financial picture.',
+    sub: 'One-time financial planning packages for new projects, startups and restaurants.',
+    kicker: 'Small & medium businesses', title: 'Start with the right numbers',
+    text: 'Before you sign a lease or order equipment, know your costs, your prices and when you will break even. Our SME packages give founders and investors a clear, realistic financial picture.',
     why: [
       { icon: 'chart', title: 'Realistic projections', text: 'Forecasts built on local market costs, not guesses.' },
-      { icon: 'compass', title: 'Any industry', text: 'Trading, retail, F&B, healthcare, services, contracting and more.' },
+      { icon: 'food', title: 'F&B expertise', text: 'Menu costing and pricing for restaurants and cafés.' },
       { icon: 'briefcase', title: 'Investor-ready', text: 'Clear reports you can share with banks and partners.' },
     ],
-    note: 'One-time fee in Kuwaiti Dinar. Custom scopes are available on request.',
+    pkgTitle: 'SME packages', note: 'One-time fees in Kuwaiti Dinar. Custom scopes are available on request.',
   },
   ar: {
-    kicker: 'خطط الأعمال', title: 'ابدأ بالأرقام الصحيحة',
-    text: 'سواء كنت تطلق مشروعاً جديداً أو توسّع نشاطاً قائماً، اعرف تكاليفك وأسعارك ومتى تصل إلى نقطة التعادل قبل أن تستثمر. تمنح خطتنا أصحاب الأعمال والبنوك والمستثمرين صورة مالية واضحة وواقعية.',
+    sub: 'باقات تخطيط مالي لمرة واحدة للمشاريع الجديدة والناشئة والمطاعم.',
+    kicker: 'المشاريع الصغيرة والمتوسطة', title: 'ابدأ بالأرقام الصحيحة',
+    text: 'قبل توقيع عقد الإيجار أو طلب المعدات، اعرف تكاليفك وأسعارك ومتى تصل إلى نقطة التعادل. تمنح باقاتنا المؤسسين والمستثمرين صورة مالية واضحة وواقعية.',
     why: [
       { icon: 'chart', title: 'توقعات واقعية', text: 'تقديرات مبنية على تكاليف السوق المحلي وليس على التخمين.' },
-      { icon: 'compass', title: 'لأي قطاع', text: 'التجارة والتجزئة والمطاعم والرعاية الصحية والخدمات والمقاولات وغيرها.' },
+      { icon: 'food', title: 'خبرة في المطاعم', text: 'احتساب تكلفة قوائم الطعام وتسعيرها للمطاعم والمقاهي.' },
       { icon: 'briefcase', title: 'جاهزة للمستثمرين', text: 'تقارير واضحة يمكنك مشاركتها مع البنوك والشركاء.' },
     ],
-    note: 'رسوم لمرة واحدة بالدينار الكويتي. يمكن تخصيص نطاق العمل عند الطلب.',
+    pkgTitle: 'باقات المشاريع الصغيرة', note: 'رسوم لمرة واحدة بالدينار الكويتي. يمكن تخصيص نطاق العمل عند الطلب.',
   },
 }[lang];
 ---
 <div class="sol-block" id="plans">
   <section class="section">
-    <div class="container split">
-      <div class="reveal">
-        <span class="kicker">{c.kicker}</span><h2>{c.title}</h2><p>{c.text}</p>
-        <div class="plan-why">
-          {c.why.map((w) => <div class="plan-why-item"><div class="icon"><Icon name={w.icon} size={22} /></div><div><h3>{w.title}</h3><p>{w.text}</p></div></div>)}
-        </div>
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{c.kicker}</span><h2>{c.title}</h2><p>{c.text}</p></div>
+      <div class="grid grid-3">
+        {c.why.map((w) => <div class="feature reveal"><div class="icon"><Icon name={w.icon} /></div><h3>{w.title}</h3><p>{w.text}</p></div>)}
       </div>
-      <div>
-        {smePackages[lang].map((p) => <PackageCard lang={lang} pkg={p} />)}
-        <p class="note">{c.note}</p>
-      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head reveal"><h2>{c.pkgTitle}</h2></div>
+      <div class="grid grid-3">{smePackages[lang].map((p) => <PackageCard lang={lang} pkg={p} />)}</div>
+      <p class="note">{c.note}</p>
     </div>
   </section>
 </div>
