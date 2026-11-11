@@ -25,7 +25,7 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
         'Monthly bank and delivery-platform reconciliation',
         'Year-end inventory count support (once a year)',
         'Zakat calculation',
-        'Up to 3 on-site visits per month',
+        '2 on-site visits per month',
       ],
     },
     {
@@ -42,7 +42,7 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
         'Indemnity and end-of-service calculations',
         'Weekly bank and platform reconciliation',
         'Management reports tailored to your goals',
-        'Up to 6 on-site visits per month',
+        '4 on-site visits per month',
       ],
     },
     {
@@ -77,7 +77,7 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
         'تسوية شهرية للحسابات البنكية ومنصات التوصيل',
         'دعم الجرد السنوي (مرة واحدة في السنة)',
         'احتساب الزكاة',
-        'حتى 3 زيارات ميدانية شهرياً',
+        'زيارتان ميدانيتان شهرياً',
       ],
     },
     {
@@ -94,7 +94,7 @@ export const monthlyPackages: Record<Lang, Pkg[]> = {
         'احتساب مكافأة نهاية الخدمة',
         'تسوية أسبوعية للحسابات البنكية والمنصات',
         'تقارير إدارية مصممة حسب أهدافك',
-        'حتى 6 زيارات ميدانية شهرياً',
+        '4 زيارات ميدانية شهرياً',
       ],
     },
     {
