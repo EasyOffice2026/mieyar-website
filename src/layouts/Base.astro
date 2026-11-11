@@ -10,7 +10,7 @@ const u = t(lang);
 const other: Lang = lang === 'en' ? 'ar' : 'en';
 const fullTitle = title ? `${title} | ${u.brandFull}` : `${u.brandFull} | ${u.tagline}`;
 const desc = description ?? u.footerAbout;
-const navKeys: PageKey[] = ['home', 'about', 'accounting', 'solutions', 'advisory', 'clients', 'contact'];
+const navKeys: PageKey[] = ['home', 'about', 'accounting', 'advisory', 'solutions', 'clients', 'contact'];
 const year = new Date().getFullYear();
 const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
 ---
@@ -73,7 +73,7 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
         <div>
           <h4>{u.services}</h4>
           <ul>
-            {(['accounting', 'sme', 'clinics', 'inventory', 'advisory'] as LinkKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+            {(['accounting', 'advisory', 'sme', 'clinics', 'inventory'] as LinkKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
           </ul>
         </div>
         <div>
