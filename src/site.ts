@@ -25,6 +25,7 @@ export const pages = {
   advisory: 'advisory',
   clients: 'clients',
   careers: 'careers',
+  learn: 'learning-center',
   contact: 'contact',
 } as const;
 

@@ -67,7 +67,7 @@ const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
         <div>
           <h4>{u.quickLinks}</h4>
           <ul>
-            {(['home', 'about', 'clients', 'careers', 'contact'] as PageKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
+            {(['home', 'about', 'clients', 'learn', 'careers', 'contact'] as PageKey[]).map((k) => <li><a href={href(lang, k)}>{u.nav[k]}</a></li>)}
           </ul>
         </div>
         <div>

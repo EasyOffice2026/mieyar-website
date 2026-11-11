@@ -210,6 +210,19 @@ const c = {
     </div>
   </section>
 
+  <section class="section alt">
+    <div class="container">
+      <div class="learn-teaser reveal">
+        <div class="icon"><Icon name="book" /></div>
+        <div>
+          <h2>{lang === 'ar' ? 'مركز المعرفة' : 'Learning Center'}</h2>
+          <p>{lang === 'ar' ? 'أدلة مبسّطة عن مسك الدفاتر والإدارة المالية والاستشارات، مع المصطلحات والأسئلة الشائعة.' : 'Simple guides to bookkeeping, financial management and advisory, plus key terms and FAQs.'}</p>
+        </div>
+        <a class="btn btn-gold" href={href(lang, 'learn')}>{lang === 'ar' ? 'ابدأ التعلّم' : 'Start learning'} <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
   <Cta lang={lang} />
 </Base>
 
