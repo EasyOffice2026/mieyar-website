@@ -11,6 +11,8 @@ export function getStaticPaths() { return langs.map((lang) => ({ params: { lang 
 const lang = Astro.params.lang as Lang;
 const u = t(lang);
 
+const slideImgs = ['/img/slide-standard.jpg', '/img/slide-books.jpg', '/img/slide-strategy.jpg', '/img/slide-numbers.jpg'];
+
 const c = {
   en: {
     eyebrow: 'Mieyar Accounting Consultancy',
@@ -106,7 +108,7 @@ const c = {
 ---
 <Base lang={lang} page="home">
   <section class="hero">
-    <div class="hero-bg" style="background-image:url(/img/hero.jpg)"></div>
+    {slideImgs.map((img, i) => <div class:list={['hero-bg', 'hero-slide', i === 0 && 'on']} style={`background-image:url(${img})`}></div>)}
     <div class="container">
       <div class="hero-content">
         <div class="eyebrow">{c.eyebrow}</div>
@@ -118,6 +120,7 @@ const c = {
           <a class="btn btn-gold" href={href(lang, 'accounting')}>{u.viewPackages} <Icon name="arrow" size={18} /></a>
           <a class="btn btn-outline" href={href(lang, 'contact')}>{u.letsTalk}</a>
         </div>
+        <div class="hero-dots">{slideImgs.map((_, i) => <button type="button" class:list={[i === 0 && 'on']} aria-label={`${i + 1}`}></button>)}</div>
         <div class="hero-pills">{u.tagline.split(' · ').map((s) => <span>{s}</span>)}</div>
       </div>
     </div>
@@ -212,12 +215,17 @@ const c = {
 
 <script>
   const slogans = [...document.querySelectorAll<HTMLElement>('.hero .slogan')];
-  if (slogans.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let i = 0;
-    setInterval(() => {
-      slogans[i].classList.remove('on'); slogans[i].setAttribute('aria-hidden', 'true');
-      i = (i + 1) % slogans.length;
-      slogans[i].classList.add('on'); slogans[i].removeAttribute('aria-hidden');
-    }, 4000);
-  }
+  const slides = [...document.querySelectorAll<HTMLElement>('.hero .hero-slide')];
+  const dots = [...document.querySelectorAll<HTMLButtonElement>('.hero-dots button')];
+  let i = 0;
+  let timer: ReturnType<typeof setInterval> | undefined;
+  const show = (n: number) => {
+    i = (n + slogans.length) % slogans.length;
+    slogans.forEach((el, k) => { el.classList.toggle('on', k === i); el.toggleAttribute('aria-hidden', k !== i); });
+    slides.forEach((el, k) => el.classList.toggle('on', k === i));
+    dots.forEach((el, k) => el.classList.toggle('on', k === i));
+  };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(i + 1), 6000); };
+  dots.forEach((d, k) => d.addEventListener('click', () => { show(k); start(); }));
+  if (slogans.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) start();
 </script>
