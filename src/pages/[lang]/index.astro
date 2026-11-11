@@ -6,6 +6,7 @@ import Cta from '../../components/Cta.astro';
 import { langs, href, type Lang } from '../../site';
 import { t } from '../../i18n/ui';
 import { monthlyPackages } from '../../i18n/packages';
+import { clients } from '../../clients';
 
 export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
 const lang = Astro.params.lang as Lang;
@@ -206,6 +207,15 @@ const c = {
         {c.steps.map((s) => (
           <div class="step reveal"><h3>{s.title}</h3><p>{s.text}</p></div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">{lang === 'ar' ? 'عملاؤنا' : 'Our clients'}</span><h2>{lang === 'ar' ? 'شركات تثق بنا' : 'Trusted by growing businesses'}</h2></div>
+      <div class="client-logos">
+        {clients.map((cl) => <a class="client-logo reveal" href={href(lang, 'clients')}><img src={cl.logo} alt={cl.name} loading="lazy" /></a>)}
       </div>
     </div>
   </section>

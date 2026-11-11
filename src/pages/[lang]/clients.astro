@@ -5,6 +5,7 @@ import PageHero from '../../components/PageHero.astro';
 import Cta from '../../components/Cta.astro';
 import { langs, type Lang } from '../../site';
 import { t } from '../../i18n/ui';
+import { clients } from '../../clients';
 
 export function getStaticPaths() { return langs.map((lang) => ({ params: { lang } })); }
 const lang = Astro.params.lang as Lang;
@@ -19,7 +20,7 @@ const c = {
       { icon: 'briefcase', title: 'Professional Services' }, { icon: 'star', title: 'Startups & Home Businesses' },
       { icon: 'users', title: 'Salons & Fitness' }, { icon: 'settings', title: 'Contracting & Maintenance' },
     ],
-    logosTitle: 'Our clients', logosText: 'Client logos will be displayed here.',
+    logosTitle: 'Our clients', logosText: 'Businesses that trust Mieyar with their numbers.',
   },
   ar: {
     sub: 'ندعم الشركات بمختلف أحجامها في مجموعة واسعة من القطاعات في الكويت.',
@@ -30,7 +31,7 @@ const c = {
       { icon: 'briefcase', title: 'الخدمات المهنية' }, { icon: 'star', title: 'المشاريع الناشئة والمنزلية' },
       { icon: 'users', title: 'الصالونات والأندية الرياضية' }, { icon: 'settings', title: 'المقاولات والصيانة' },
     ],
-    logosTitle: 'عملاؤنا', logosText: 'سيتم عرض شعارات العملاء هنا.',
+    logosTitle: 'عملاؤنا', logosText: 'شركات تثق بمعيار في إدارة أرقامها.',
   },
 }[lang];
 ---
@@ -46,10 +47,9 @@ const c = {
   </section>
   <section class="section alt">
     <div class="container">
-      <div class="section-head reveal"><h2>{c.logosTitle}</h2></div>
-      <div class="placeholder-box reveal">
-        <p>{c.logosText}</p>
-        <div class="logo-tiles">{Array.from({ length: 6 }).map(() => <div />)}</div>
+      <div class="section-head reveal"><h2>{c.logosTitle}</h2><p>{c.logosText}</p></div>
+      <div class="client-logos">
+        {clients.map((cl) => <div class="client-logo reveal"><img src={cl.logo} alt={cl.name} loading="lazy" /></div>)}
       </div>
     </div>
   </section>
