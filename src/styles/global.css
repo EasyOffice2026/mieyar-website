@@ -358,3 +358,6 @@ html[dir='rtl'] .learn-more svg, html[dir='rtl'] .learn-topic .learn-more svg { 
 .client-logo img { width: 100%; height: 100%; object-fit: contain; }
 @media (max-width: 1000px) { .client-logos { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .client-logos { grid-template-columns: repeat(2, 1fr); } .client-logo { height: 120px; } }
+.logo { flex: none; }
+@media (max-width: 1500px) { .header-cta { display: none; } }
+@media (min-width: 1321px) { .main-nav a { padding-inline: 7px; } }

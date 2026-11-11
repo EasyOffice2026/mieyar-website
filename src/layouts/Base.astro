@@ -10,7 +10,7 @@ const u = t(lang);
 const other: Lang = lang === 'en' ? 'ar' : 'en';
 const fullTitle = title ? `${title} | ${u.brandFull}` : `${u.brandFull} | ${u.tagline}`;
 const desc = description ?? u.footerAbout;
-const navKeys: PageKey[] = ['home', 'about', 'accounting', 'advisory', 'solutions', 'clients', 'careers', 'contact'];
+const navKeys: PageKey[] = ['home', 'about', 'accounting', 'advisory', 'solutions', 'clients', 'learn', 'careers', 'contact'];
 const year = new Date().getFullYear();
 const wa = site.whatsapp ? `https://wa.me/${site.whatsapp}` : '';
 ---
