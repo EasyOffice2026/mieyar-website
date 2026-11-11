@@ -307,7 +307,7 @@ html[dir='rtl'] .pkg .inc { letter-spacing: 0; }
 .hero .slogan { grid-area: 1 / 1; opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; pointer-events: none; }
 .hero .slogan.on { opacity: 1; transform: none; pointer-events: auto; }
 
-.hero-slide { opacity: 0; transform: scale(1.08); transition: opacity 1.2s ease, transform 11s ease-out; }
+.hero-slide { opacity: 0; transform: scale(1.08); transition: opacity 1.2s ease, transform 6s ease-out; }
 .hero-slide.on { opacity: .55; transform: scale(1); }
 .hero-dots { display: flex; gap: 10px; margin-top: 34px; }
 .hero-dots button { width: 34px; height: 4px; padding: 0; border: 0; border-radius: 4px; background: rgba(255,255,255,.35); cursor: pointer; transition: background .3s, width .3s; }
